@@ -1,0 +1,31 @@
+﻿Model,Released,Performance,Base Fit Speed,Prediction Speed,Tuning Cost,Memory Use,Overfit,Scaling Sensitivity,Need Scaling?,Hyperparam Sensitivity,External Library?,Can Continue Training?,Continue Training Method,Short Description
+Linear Regressor,2010,6,10,10,1,2,2,3,Not required,1,No,No,-,Simple linear model
+Ridge Regressor,2010,7,10,10,2,2,1,6,Yes / recommended,4,No,No,-,L2-regularized linear model
+Lasso Regressor,2010,7,10,10,4,3,2,7,Yes / recommended,6,No,No,-,L1 regularization + feature selection
+ElasticNet Regressor,2010,8,10,10,4,3,2,8,Yes / recommended,8,No,No,-,Combination of L1 and L2
+Bayesian Ridge Regressor,2010,7,10,10,2,3,1,6,Yes / recommended,4,No,No,-,Bayesian regularized linear model
+RANSAC Regressor,2010,7,10,10,5,4,3,4,Not required,7,No,No,-,Robust model against outliers
+SGD Regressor,2010,7,10,10,4,1,4,8,Yes,7,No,Yes,"`partial_fit(X, y)`",Gradient-based online linear model
+SVR (linear),2010,8,3,4,8,4,3,8,Yes,6,No,No,-,Linear margin-based regressor
+SVR (RBF),2010,9,3,1,10,7,7,10,Yes,9,No,No,-,Kernel-based nonlinear regressor
+KNeighbors Regressor,2010,7,10,8,4,8,10,9,Yes,5,No,No,-,Distance-based model that stores the training data
+NuSVR Regressor,2010,9,2,6,10,7,7,10,Yes,9,No,No,-,"Nu-based kernel SVR, usually strong but very slow on large datasets"
+Decision Tree Regressor,2010,7,10,10,3,3,10,1,No,4,No,No,-,Tree-based model
+Random Forest Regressor,2010,9,8,10,5,7,4,1,No,5,No,No,-,Bagged ensemble of decision trees
+AdaBoost Regressor,2010,8,9,10,6,4,6,2,No,6,No,No,-,Boosting regressor that corrects errors step by step
+Bagging Regressor,2010,8,8,10,5,6,5,Depends,Depends,5,No,No,-,Average of multiple bootstrap-trained models
+Dummy Regressor,2013,1,10,10,1,1,1,1,No,1,No,No,-,"Naive baseline, for example predicts the mean"
+Extra Trees Regressor,2013,9,9,10,4,7,4,1,No,4,No,No,-,Strongly randomized tree ensemble
+XGBoost Regressor,2014,10,10,10,6,7,8,2,No,9,Yes (xgboost),Yes,"`fit(X, y, xgb_model=old_model)`",Strong regularized boosting
+Huber Regressor,2016,7,10,10,5,3,2,7,Yes / recommended,5,No,No,-,Robust linear regressor for outliers
+Gradient Boosting Regressor,2016,10,9,10,7,5,8,2,No,8,No,No,-,Classic boosting model
+MLP Regressor,2016,9,3,10,8,6,8,9,Yes,9,No,Yes,"`partial_fit(X, y)`",Neural network for regressor
+Passive Aggressive Regressor,2017,6,10,10,4,1,5,8,Yes,6,No,Yes,"`partial_fit(X, y)`",Online linear model with aggressive updates
+LightGBM Regressor,2017,10,10,10,5,5,8,2,No,8,Yes (lightgbm),Yes,"`fit(X, y, init_model=old_model)`",Very fast boosting for large datasets
+CatBoost Regressor,2017,10,10,10,6,6,7,2,No,6,Yes (catboost),Yes,"`fit(X, y, init_model=old_model)`","Strong boosting, also good with categorical data"
+Voting Regressor,2019,8,5,10,3,5,5,Depends,Depends,4,No,No,-,Average of predictions from multiple regressors
+Stacking Regressor,2019,9,3,10,5,7,6,Depends,Depends,8,No,No,-,Multi-level ensemble meta-model
+Poisson Regressor,2020,6,8,10,4,2,2,6,Yes / recommended,5,No,No,-,GLM for strictly positive count-like targets with log link
+Gamma Regressor,2020,5,8,10,5,2,2,6,Yes / recommended,6,No,No,-,GLM for strictly positive right-skewed targets with log link
+Hist Gradient Boosting Regressor,2020,10,10,10,5,5,7,2,No,7,No,No,-,Fast boosting for larger datasets
+Quantile Regressor,2021,7,8,10,6,3,2,7,Yes / recommended,7,No,No,-,"Linear model that predicts conditional quantiles, robust to outliers"

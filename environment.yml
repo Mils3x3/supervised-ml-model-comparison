@@ -1,0 +1,39 @@
+name: supervised-ml-model-comparison
+channels:
+  - conda-forge
+dependencies:
+  - matplotlib
+  - statsmodels
+  - numpy
+  - seaborn
+  - notebook
+  - ipykernel
+  - threadpoolctl
+  - scikit-learn
+  - joblib
+  - pandas
+  - openpyxl
+  - python=3.11.14
+  - jupyterlab
+  - xgboost
+  - catboost=1.2.10
+  - optuna
+  - numba
+  - graphviz
+  - scikit-optimize
+  - lightgbm
+  - python-graphviz
+  - umap-learn
+  - networkx
+  - branca
+  - widgetsnbextension
+  - jupyterlab_widgets
+  - tifffile
+  - folium
+  - ipywidgets
+  - imageio
+  - lazy-loader
+  - xyzservices
+  - imagecodecs
+  - dataframe_image
+  - lxml

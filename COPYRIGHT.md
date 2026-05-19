@@ -4,7 +4,7 @@
 
 This repository and its contents are the intellectual property of **Milan Olah**.
 
-This project is shared publicly for portfolio, educational demonstration, and professional review purposes only.
+This project is made publicly available for portfolio review, educational demonstration, and professional evaluation purposes only.
 
 ---
 
@@ -12,7 +12,9 @@ This project is shared publicly for portfolio, educational demonstration, and pr
 
 This repository does **not** include an open-source license.
 
-Unless written permission is given by the author, no permission is granted to copy, redistribute, modify, publish, sell, sublicense, or present this work as your own.
+Public visibility on GitHub does not grant permission to copy, redistribute, modify, publish, sell, sublicense, or present this work as your own.
+
+Unless written permission is given by the author, all rights remain reserved.
 
 ---
 
@@ -21,8 +23,8 @@ Unless written permission is given by the author, no permission is granted to co
 You may:
 
 - View this repository for portfolio review
-- Read the notebooks, reports, documentation, and result summaries
-- Reference the project as part of reviewing the author's data science and machine learning portfolio
+- Read the notebooks, reports, documentation, images, and result summaries
+- Review the project as part of evaluating the author's data science and machine learning portfolio
 - Share a link to the original repository with proper attribution
 
 ---
@@ -34,7 +36,7 @@ You may not:
 - Copy this project and present it as your own work
 - Submit this project as academic, professional, or portfolio work under your own name
 - Redistribute the notebooks, reports, images, result files, or documentation
-- Modify and republish the project without permission
+- Modify and republish this project without written permission
 - Sell or commercially use any part of this project
 - Remove or alter copyright notices, author attribution, or ownership information
 
@@ -44,7 +46,7 @@ You may not:
 
 Although this repository may be publicly visible on GitHub, public visibility does not mean that the work is free to copy, reuse, or redistribute.
 
-The project is made public so that potential employers, recruiters, collaborators, and reviewers can evaluate the author's machine learning and data science work.
+The project is public so that potential employers, recruiters, collaborators, and reviewers can evaluate the author's machine learning and data science work.
 
 ---
 
@@ -63,7 +65,13 @@ A link to the original GitHub repository should also be included where possible.
 
 ## Permission Requests
 
-For permission to reuse, adapt, or reference a substantial part of this project, please contact the author directly.
+For permission to reuse, adapt, quote, or reference a substantial part of this project, please contact the author directly.
+
+---
+
+## Disclaimer
+
+This notice is intended to clearly state the author's copyright and usage intentions for this portfolio project. It is not a substitute for formal legal advice.
 
 ---
 

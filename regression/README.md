@@ -1,6 +1,6 @@
 # Supervised Regression Model Comparison
 
-A structured machine learning project comparing multiple supervised regression models for predicting diamond prices.
+A structured machine learning portfolio project comparing multiple supervised regression models for predicting diamond prices.
 
 This project is part of the larger repository:
 
@@ -17,12 +17,14 @@ The focus is not only on finding the best-performing model, but also on understa
 The project compares models by:
 
 - Predictive performance
-- Error metrics
+- Regression error metrics
 - Cross-validation behaviour
 - Final test-set performance
-- Training and prediction time
+- Training and prediction speed
 - Practical strengths and weaknesses
-- Feature importance where appropriate
+- Prediction behaviour across price ranges
+- Residual and error distributions
+- Permutation importance for the best model
 
 ---
 
@@ -70,17 +72,29 @@ The main Jupyter Notebook containing the full regression workflow.
 
 [reports/supervised_regression_model_comparison.html](reports/supervised_regression_model_comparison.html)
 
-An exported HTML version of the notebook for easier viewing.
+An exported HTML version of the notebook for easier viewing without running the notebook locally.
 
-### Results
+### Result Tables
 
-[results/supervised_regression_final_results.csv](results/supervised_regression_final_results.csv)
+[results/supervised_regression_tuned_model_comparison_table.csv](results/supervised_regression_tuned_model_comparison_table.csv)
 
-Final model evaluation table.
+Tuned regression model comparison table.
 
 [results/supervised_regression_practical_comparison.csv](results/supervised_regression_practical_comparison.csv)
 
-Practical comparison table describing model behaviour and usability.
+Practical comparison table describing model behaviour, usability, speed, memory usage, tuning cost, overfitting tendency, scaling sensitivity, and historical model context.
+
+[results/supervised_regression_selected_test_sample_predictions.csv](results/supervised_regression_selected_test_sample_predictions.csv)
+
+Prediction comparison on selected test samples.
+
+[results/supervised_regression_prediction_range_difference_summary.csv](results/supervised_regression_prediction_range_difference_summary.csv)
+
+Prediction range and difference summary.
+
+[results/supervised_regression_best_model_performance_by_price_range.csv](results/supervised_regression_best_model_performance_by_price_range.csv)
+
+Best model performance by price range.
 
 ---
 
@@ -117,6 +131,7 @@ The project compares a wide range of regression model families, including:
 - Lasso Regression
 - ElasticNet
 - Bayesian Ridge
+- Quantile Regressor
 
 ### Robust and Online Linear Models
 
@@ -125,9 +140,13 @@ The project compares a wide range of regression model families, including:
 - SGD Regressor
 - Passive Aggressive Regressor
 
+### GLM / Distribution-Based Linear Models
+
+- Poisson Regressor
+- Gamma Regressor
+
 ### Support Vector Models
 
-- Linear SVR
 - SVR with linear kernel
 - SVR with RBF kernel
 - NuSVR
@@ -172,45 +191,76 @@ The project follows this workflow:
 6. Train baseline regression models
 7. Evaluate baseline models
 8. Tune selected models with cross-validation
-9. Store best estimators
+9. Store best estimators and predictions where required
 10. Compare tuned model performance
 11. Evaluate final models on the test set
-12. Save final results
-13. Analyse predictions
-14. Visualise model behaviour
-15. Interpret feature importance where appropriate
+12. Export selected result tables and visual outputs
+13. Analyse selected test sample predictions
+14. Analyse actual vs predicted values
+15. Analyse prediction ranges and price-range performance
+16. Analyse residuals and error distributions
+17. Interpret permutation importance for the best model
+18. Compare practical strengths and weaknesses of the models
 
 ---
 
 ## Visual Outputs
 
-### Model Comparison
+### Tuned Regression Model Comparison
 
-![Regression Model Comparison](images/supervised_regression_model_comparison.png)
+![Tuned Regression Model Comparison](images/supervised_regression_model_comparison.png)
 
-### Actual vs Predicted Values
+### Tuned Regression Model Comparison Table
 
-![Actual vs Predicted](images/supervised_regression_actual_vs_predicted.png)
+![Tuned Regression Model Comparison Table](images/supervised_regression_tuned_model_comparison_table.png)
 
-### Residual Analysis
+### Practical Comparison of Regression Models
 
-![Residuals](images/supervised_regression_residuals.png)
+![Practical Comparison of Regression Models](images/supervised_regression_practical_comparison_table.png)
 
-### Feature Importance
+### Prediction Comparison on Selected Test Samples
+
+![Prediction Comparison on Selected Test Samples](images/supervised_regression_selected_test_sample_predictions.png)
+
+### Prediction Range and Difference Summary
+
+![Prediction Range and Difference Summary](images/supervised_regression_prediction_range_difference_summary.png)
+
+### Best Model Performance by Price Range
+
+![Best Model Performance by Price Range](images/supervised_regression_best_model_performance_by_price_range.png)
+
+### Actual vs Predicted Values for the Best Regression Model
+
+![Actual vs Predicted - Best Model](images/supervised_regression_actual_vs_predicted_best_model.png)
+
+### Actual vs Predicted Values for All Tuned Regression Models
+
+![Actual vs Predicted - All Models](images/supervised_regression_actual_vs_predicted_all_models.png)
+
+### Actual vs Predicted Price Distributions by Model Group
+
+![Actual vs Predicted Distributions by Model Group](images/supervised_regression_actual_vs_predicted_distributions_by_model_group.png)
+
+### Residual Plot for the Best Regression Model
+
+![Residuals - Best Model](images/supervised_regression_residuals_best_model.png)
+
+### Residual Plots for All Tuned Regression Models
+
+![Residuals - All Models](images/supervised_regression_residuals_all_models.png)
+
+### Error Distribution for the Best Regression Model
+
+![Error Distribution - Best Model](images/supervised_regression_error_distribution_best_model.png)
+
+### Error Distributions for All Tuned Regression Models
+
+![Error Distributions - All Models](images/supervised_regression_error_distribution_all_models.png)
+
+### Permutation Importance for the Best Regression Model
 
 ![Permutation Importance](images/supervised_regression_permutation_importance.png)
-
----
-
-## Example Result Summary
-
-TODO: Replace this section with the final model results after the final full run.
-
-| Model | RMSE | R² | Notes |
-|---|---:|---:|---|
-| TODO | TODO | TODO | Best overall regression model |
-| TODO | TODO | TODO | Strong performance and practical speed |
-| TODO | TODO | TODO | Good simple baseline |
 
 ---
 
@@ -220,17 +270,21 @@ In addition to numerical performance, the project includes a practical compariso
 
 The practical comparison considers:
 
-- Speed
-- Memory usage
+- Approximate historical release / origin year
+- Predictive performance
+- Base fit speed
+- Prediction speed
+- Tuning cost
+- Memory use
 - Overfitting tendency
 - Scaling sensitivity
+- Whether scaling is required or recommended
 - Hyperparameter sensitivity
 - External library requirement
-- Ability to continue training
-- Interpretability
-- Typical use case
+- Whether the model can continue training
+- Practical summary of each model
 
-This makes the project useful not only for score comparison, but also for understanding when different regression models may be appropriate in real-world use.
+The practical scores are project-based ratings on a 0–10 scale. They reflect the behaviour observed in this notebook and are intended as practical guidance for this project, not as universal theoretical rankings.
 
 ---
 
@@ -244,7 +298,9 @@ This project demonstrates the ability to:
 - Apply cross-validation and hyperparameter tuning
 - Evaluate models with appropriate regression metrics
 - Interpret final results beyond a single score
-- Save results, reports, and visual outputs
+- Analyse prediction errors and residual behaviour
+- Compare model behaviour across different price ranges
+- Save selected results, reports, and visual outputs
 - Present a machine learning project clearly for portfolio purposes
 
 ---
@@ -255,6 +311,7 @@ This project demonstrates the ability to:
 - Jupyter Notebook
 - pandas
 - NumPy
+- SciPy
 - scikit-learn
 - matplotlib
 - seaborn
@@ -267,10 +324,13 @@ This project demonstrates the ability to:
 
 ## How to Run
 
+### Recommended: Conda / Miniforge
+
 From the root of the repository:
 
 ```bash
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate supervised-ml-model-comparison
 jupyter notebook
 ```
 
@@ -282,13 +342,39 @@ regression/notebooks/supervised_regression_model_comparison.ipynb
 
 Run the notebook from top to bottom.
 
+### Alternative: pip
+
+A `requirements.txt` file is also included as a simpler pip-compatible package list:
+
+```bash
+pip install -r requirements.txt
+jupyter notebook
+```
+
+The conda environment is recommended because this project uses several machine learning libraries that are often easier to manage through `conda-forge`.
+
+---
+
+## Exported Files
+
+The notebook can export selected portfolio outputs into a local `_exports/regression_models/` folder.
+
+The public GitHub version includes the selected final outputs in:
+
+```text
+regression/images/
+regression/results/
+```
+
+Large model artifacts, temporary files, local cache files, and environment-specific files should not be included in the public repository.
+
 ---
 
 ## Notes
 
-Large exported models, temporary files, local cache files, and environment-specific files should not be included in the public repository.
+The public version is intended to show the modelling process, result summaries, visual outputs, and practical comparison clearly without unnecessary local files.
 
-The public version is intended to show the modelling process, results, and practical comparison clearly without unnecessary local files.
+The HTML report is included to make the project easy to review without running the notebook locally.
 
 ---
 

@@ -12,6 +12,7 @@ venv/
 env/
 ENV/
 .milvenv/
+.conda/
 
 # Environment and secret files
 .env
@@ -22,10 +23,6 @@ secret/
 credentials/
 *.key
 *.pem
-*.json
-
-# Exception: keep non-secret project JSON files if needed
-# !example_config.json
 
 # Local IDE/editor settings
 .vscode/
@@ -94,6 +91,7 @@ conda-meta/
 !regression/results/
 !regression/results/*.csv
 
+# Future project section: keep when binary classification is added
 !binary-classification/reports/
 !binary-classification/reports/*.html
 !binary-classification/images/

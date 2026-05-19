@@ -13,9 +13,8 @@ xgboost
 lightgbm
 catboost
 
-# Saving and loading
+# Model saving and loading
 joblib
-dataframe_image
 
 # Jupyter environment
 jupyter
