@@ -1,8 +1,102 @@
-_exports/
-.ipynb_checkpoints/
+# Python cache and compiled files
 __pycache__/
-*.pkl
-*.joblib
-*.csv
-*.xlsx
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.milvenv/
+
+# Environment and secret files
 .env
+.env.*
+*.env
+secrets/
+secret/
+credentials/
+*.key
+*.pem
+*.json
+
+# Exception: keep non-secret project JSON files if needed
+# !example_config.json
+
+# Local IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Exported model files
+*.joblib
+*.pkl
+*.pickle
+*.sav
+
+# Large or temporary model export folders
+_exports/
+exports/
+fitted_models/
+fitted_base_models/
+saved_models/
+models/
+
+# Large raw data folders
+data/raw/
+raw_data/
+
+# Local output folders that should not be published
+local_outputs/
+temporary_outputs/
+cache/
+
+# Python packaging/build files
+build/
+dist/
+*.egg-info/
+
+# Test and coverage files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Conda environment files generated locally
+conda-meta/
+
+# Keep portfolio outputs that should be published
+!regression/reports/
+!regression/reports/*.html
+!regression/images/
+!regression/images/*.png
+!regression/results/
+!regression/results/*.csv
+
+!binary-classification/reports/
+!binary-classification/reports/*.html
+!binary-classification/images/
+!binary-classification/images/*.png
+!binary-classification/results/
+!binary-classification/results/*.csv

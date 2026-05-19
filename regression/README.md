@@ -198,7 +198,7 @@ The project follows this workflow:
 
 ### Feature Importance
 
-![Feature Importance](images/supervised_regression_feature_importance.png)
+![Permutation Importance](images/supervised_regression_permutation_importance.png)
 
 ---
 
