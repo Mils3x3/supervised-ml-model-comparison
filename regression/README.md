@@ -4,7 +4,7 @@ A structured machine learning portfolio project comparing multiple supervised re
 
 This project is part of the larger repository:
 
-[Supervised ML Model Comparison](../README.md)
+[Supervised Machine Learning Model Comparison](../README.md)
 
 ---
 
@@ -21,9 +21,10 @@ The project compares models by:
 - Cross-validation behaviour
 - Final test-set performance
 - Training and prediction speed
+- Saved fitted model file size
 - Practical strengths and weaknesses
 - Prediction behaviour across price ranges
-- Residual and error distributions
+- Residual behaviour and residual distributions
 - Permutation importance for the best model
 
 ---
@@ -57,6 +58,27 @@ price
 ```
 
 The task is to predict the price of a diamond based on its available features.
+
+---
+
+## Final Regression Result
+
+The best-performing model in the final regression comparison was the **Tuned Stacking Regressor**.
+
+| Model | Test MAE | Test RMSE | Test R² |
+|---|---:|---:|---:|
+| Tuned Stacking Regressor | 264.66 | 522.41 | 0.9829 |
+| Tuned Voting Regressor | 263.88 | 523.72 | 0.9828 |
+
+The **Tuned Stacking Regressor** achieved the best overall RMSE, while the **Tuned Voting Regressor** produced a very similar result and achieved the lowest MAE among the top models.
+
+The full notebook runtime for the final completed run was:
+
+```text
+11:42:29
+```
+
+Although the tuned Stacking Regressor was the best model based on the primary RMSE metric, the project also considers practical model selection factors such as runtime, prediction speed, saved fitted model size, model complexity, and deployment simplicity.
 
 ---
 
@@ -111,8 +133,11 @@ The regression models are evaluated using:
 
 The main comparison focuses especially on:
 
-- **RMSE** – because it shows the typical prediction error in the target unit
+- **RMSE** – because it shows the typical prediction error in the target unit and is the primary model-ranking metric in this project
+- **MAE** – because it shows the average absolute prediction error in a more direct and less outlier-sensitive way
 - **R² Score** – because it shows how much variance is explained by the model
+
+The project also considers train-test gap, runtime, prediction speed, saved fitted model size, residual behaviour, and practical usability.
 
 ---
 
@@ -198,9 +223,25 @@ The project follows this workflow:
 13. Analyse selected test sample predictions
 14. Analyse actual vs predicted values
 15. Analyse prediction ranges and price-range performance
-16. Analyse residuals and error distributions
-17. Interpret permutation importance for the best model
-18. Compare practical strengths and weaknesses of the models
+16. Analyse residuals and residual distributions
+17. Compare practical strengths and weaknesses of the models
+18. Compare runtime, model complexity, and saved fitted model size
+19. Interpret permutation importance for the best model
+
+---
+
+## Voting and Stacking Strategy
+
+The project uses a two-stage ensemble strategy for Voting and Stacking.
+
+The initial Voting and Stacking regressors are built from selected untuned model pipelines.
+
+The tuned Voting and Stacking regressors are built from the best estimators found by earlier hyperparameter searches. No additional Voting weight search or Stacking final-estimator grid search is applied in the final version, because these extra searches were computationally expensive and produced only small improvements in previous runs.
+
+This keeps the comparison clear:
+
+- **Initial Voting / Stacking:** built from selected untuned model pipelines
+- **Tuned Voting / Stacking:** built from the best estimators found by earlier hyperparameter searches
 
 ---
 
@@ -250,13 +291,13 @@ The project follows this workflow:
 
 ![Residuals - All Models](images/supervised_regression_residuals_all_models.png)
 
-### Error Distribution for the Best Regression Model
+### Residual Distribution for the Best Regression Model
 
-![Error Distribution - Best Model](images/supervised_regression_error_distribution_best_model.png)
+![Residual Distribution - Best Model](images/supervised_regression_error_distribution_best_model.png)
 
-### Error Distributions for All Tuned Regression Models
+### Residual Distributions for All Tuned Regression Models
 
-![Error Distributions - All Models](images/supervised_regression_error_distribution_all_models.png)
+![Residual Distributions - All Models](images/supervised_regression_error_distribution_all_models.png)
 
 ### Permutation Importance for the Best Regression Model
 
@@ -276,6 +317,7 @@ The practical comparison considers:
 - Prediction speed
 - Tuning cost
 - Memory use
+- Saved fitted model file size
 - Overfitting tendency
 - Scaling sensitivity
 - Whether scaling is required or recommended
@@ -285,6 +327,20 @@ The practical comparison considers:
 - Practical summary of each model
 
 The practical scores are project-based ratings on a 0–10 scale. They reflect the behaviour observed in this notebook and are intended as practical guidance for this project, not as universal theoretical rankings.
+
+---
+
+## Practical Model Selection
+
+Model selection is not only about predictive accuracy. In practical machine learning workflows, runtime, prediction speed, file size, memory use, and deployment complexity can also influence which model is the best choice.
+
+The saved fitted model file sizes add a useful practical perspective to the final comparison. They give an approximate indication of how large each trained model artifact is when saved and reused. This is important because a highly accurate model may not always be the most practical option if it is slow to train, slow to predict, large to store, or more complex to deploy.
+
+Search object sizes are not used for practical deployment comparison because search objects can contain cross-validation metadata, parameter search results, and additional information that would normally not be needed when deploying only the final fitted model.
+
+In this project, the tuned Stacking Regressor achieved the best overall RMSE, while the tuned Voting Regressor produced a very similar result. However, both models are ensemble-based and can be more complex or larger than some individual models. From a practical point of view, tuned LightGBM and tuned CatBoost are especially attractive alternatives because they achieved strong predictive performance while remaining simpler than the largest ensemble combinations.
+
+This shows that the best model depends on the practical goal. If the priority is the lowest possible RMSE, the tuned Stacking Regressor is the best choice in this project. If the priority is a strong balance between accuracy, training time, prediction speed, saved model size, and deployment simplicity, tuned LightGBM or tuned CatBoost may be more practical choices.
 
 ---
 
@@ -300,6 +356,7 @@ This project demonstrates the ability to:
 - Interpret final results beyond a single score
 - Analyse prediction errors and residual behaviour
 - Compare model behaviour across different price ranges
+- Compare runtime, practical usability, and saved fitted model size
 - Save selected results, reports, and visual outputs
 - Present a machine learning project clearly for portfolio purposes
 
@@ -366,21 +423,24 @@ regression/images/
 regression/results/
 ```
 
-Large model artifacts, temporary files, local cache files, and environment-specific files should not be included in the public repository.
+Large model artifacts, search objects, temporary files, local cache files, and environment-specific files should not be included in the public repository.
 
 ---
 
-## Notes
+## Notes for Reviewers
 
-The public version is intended to show the modelling process, result summaries, visual outputs, and practical comparison clearly without unnecessary local files.
+The public version is intended to show the modelling process, result summaries, visual outputs, practical comparison, and model selection reasoning clearly without unnecessary local files.
 
 The HTML report is included to make the project easy to review without running the notebook locally.
+
+The full notebook runtime for the final completed run was **11:42:29**. Runtime may vary depending on hardware, package versions, and parallel processing configuration.
 
 ---
 
 ## Author
 
 **Milan Olah**  
+Supervised Machine Learning Model Comparison  
 Data Science / Machine Learning Portfolio Project
 
 ---

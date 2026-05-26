@@ -1,8 +1,8 @@
-# Supervised ML Model Comparison
+# Supervised Machine Learning Model Comparison
 
 A machine learning portfolio project focused on structured supervised model comparison.
 
-The current public version contains the completed **Regression Model Comparison** project, which compares a wide range of supervised regression models for predicting diamond prices. A **Binary Classification** project is planned as a future extension and will be added after the regression project is fully finalised.
+The current public version contains the completed **Regression Model Comparison** project, which compares a wide range of supervised regression models for predicting diamond prices. A **Binary Classification Model Comparison** project is planned as a future extension and will be added after the regression project is fully finalised.
 
 ---
 
@@ -28,17 +28,38 @@ The regression project demonstrates:
 - Cross-validation
 - Final test-set evaluation
 - Practical model comparison
-- Prediction and error analysis
+- Prediction and residual analysis
 - Feature / permutation importance
 - Exported HTML report
 - Portfolio-ready visual summaries and result tables
 
 ---
 
+## Final Regression Result
+
+The best-performing model in the final regression comparison was the **Tuned Stacking Regressor**.
+
+| Model | Test MAE | Test RMSE | Test R² |
+|---|---:|---:|---:|
+| Tuned Stacking Regressor | 264.66 | 522.41 | 0.9829 |
+| Tuned Voting Regressor | 263.88 | 523.72 | 0.9828 |
+
+The **Tuned Stacking Regressor** achieved the best overall RMSE, while the **Tuned Voting Regressor** produced a very similar result and achieved the lowest MAE among the top models.
+
+The full notebook runtime for the final completed run was:
+
+```text
+11:42:29
+```
+
+From a practical model selection perspective, the best statistical model is not always the only reasonable choice. The project also considers training time, prediction time, saved model size, model complexity, and deployment practicality. In this context, models such as tuned LightGBM and tuned CatBoost can be attractive practical alternatives because they provide strong performance with simpler model artifacts than the largest ensemble combinations.
+
+---
+
 ## Repository Structure
 
 ```text
-ml-supervised-model-comparison/
+supervised-ml-model-comparison/
 ├── .gitattributes
 ├── .gitignore
 ├── COPYRIGHT.md
@@ -98,6 +119,8 @@ price
 - RMSE
 - R² Score
 
+The primary comparison metric is **RMSE**, while MAE, R², train-test gap, residual behaviour, runtime, model size, and practical usability are also considered.
+
 ### Main Notebook
 
 [supervised_regression_model_comparison.ipynb](regression/notebooks/supervised_regression_model_comparison.ipynb)
@@ -126,9 +149,9 @@ price
 
 ![Actual vs Predicted - All Models](regression/images/supervised_regression_actual_vs_predicted_all_models.png)
 
-### Prediction Error Distributions for All Tuned Regression Models
+### Residual Distributions for All Tuned Regression Models
 
-![Error Distributions - All Models](regression/images/supervised_regression_error_distribution_all_models.png)
+![Residual Distributions - All Models](regression/images/supervised_regression_error_distribution_all_models.png)
 
 ### Permutation Importance for the Best Regression Model
 
@@ -186,9 +209,45 @@ The regression notebook follows this workflow:
 9. Evaluate final models on the test set
 10. Save selected result tables and visual outputs
 11. Analyse prediction behaviour
-12. Analyse residuals and error distributions
+12. Analyse residuals and residual distributions
 13. Review practical strengths and weaknesses of the models
-14. Interpret permutation importance for the best model
+14. Compare runtime, model complexity, and saved fitted model size
+15. Interpret permutation importance for the best model
+
+---
+
+## Voting and Stacking Strategy
+
+The project uses a two-stage ensemble strategy for Voting and Stacking.
+
+The initial Voting and Stacking regressors are built from selected untuned model pipelines.
+
+The tuned Voting and Stacking regressors are built from the best estimators found by earlier hyperparameter searches. No additional Voting weight search or Stacking final-estimator grid search is applied in the final version, because these extra searches were computationally expensive and produced only small improvements in previous runs.
+
+This keeps the comparison clear:
+
+- **Initial Voting / Stacking:** built from selected untuned model pipelines
+- **Tuned Voting / Stacking:** built from the best estimators found by earlier hyperparameter searches
+
+---
+
+## Practical Model Selection
+
+The project does not select a model based only on the lowest error score.
+
+Although the **Tuned Stacking Regressor** achieved the best RMSE, practical model selection may also depend on:
+
+- training time
+- prediction time
+- saved fitted model file size
+- model complexity
+- deployment simplicity
+- interpretability
+- maintenance cost
+
+This means that a slightly less accurate model may still be a better practical choice in some real-world situations.
+
+For example, tuned LightGBM and tuned CatBoost offer strong predictive performance while remaining simpler than the largest ensemble combinations. The tuned Voting Regressor is also a strong ensemble alternative, but it can create a larger model artifact because it contains multiple component models.
 
 ---
 
@@ -250,7 +309,7 @@ The conda environment is recommended because this project uses several machine l
 
 This repository is designed as a portfolio project.
 
-The notebook shows not only final results, but also the modelling process, tuning logic, practical comparison, prediction analysis, and visual interpretation.
+The notebook shows not only final results, but also the modelling process, tuning logic, practical comparison, prediction analysis, residual analysis, runtime considerations, saved model artifacts, and visual interpretation.
 
 The HTML report is included to make the project easier to review without running the notebook locally.
 
@@ -271,6 +330,7 @@ binary-classification/
 ## Author
 
 **Milan Olah**  
+Supervised Machine Learning Model Comparison  
 Data Science / Machine Learning Portfolio Project
 
 ---

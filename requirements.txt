@@ -2,6 +2,7 @@
 numpy
 pandas
 scipy
+packaging
 
 # Visualisation
 matplotlib
@@ -13,14 +14,12 @@ xgboost
 lightgbm
 catboost
 
-# Model saving and loading
+# Model saving, loading and environment summary
 joblib
+psutil
 
-# Jupyter environment
+# Jupyter environment and HTML export
 jupyter
 notebook
 ipykernel
 nbconvert
-
-# Optional utility for progress bars
-tqdm

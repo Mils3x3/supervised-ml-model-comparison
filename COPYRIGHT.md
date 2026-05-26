@@ -56,26 +56,4 @@ If you refer to this project, please include clear attribution:
 
 ```text
 Author: Milan Olah
-Project: Supervised ML Model Comparison
-```
-
-A link to the original GitHub repository should also be included where possible.
-
----
-
-## Permission Requests
-
-For permission to reuse, adapt, quote, or reference a substantial part of this project, please contact the author directly.
-
----
-
-## Disclaimer
-
-This notice is intended to clearly state the author's copyright and usage intentions for this portfolio project. It is not a substitute for formal legal advice.
-
----
-
-## Author
-
-**Milan Olah**  
-Data Science / Machine Learning Portfolio Project
+Project: Supervised Machine Learning Model Comparison
