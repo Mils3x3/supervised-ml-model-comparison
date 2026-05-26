@@ -61,11 +61,11 @@ From a practical model selection perspective, the best statistical model is not 
 ```text
 supervised-ml-model-comparison/
 ├── .gitattributes
-├── .gitignore
 ├── COPYRIGHT.md
+├── environment.yml
+├── gitignore
 ├── README.md
 ├── requirements.txt
-├── environment.yml
 │
 └── regression/
     ├── README.md
