@@ -20,49 +20,6 @@ Both projects compare a wide range of supervised machine learning models using c
 
 ---
 
-## Visual Project Overview
-
-The repository contains two parallel supervised machine learning projects built on the same dataset: one regression workflow and one binary classification workflow. The visual summaries below highlight the main model comparison outputs from both projects.
-
-<table>
-  <tr>
-    <td width="50%" align="center">
-      <h3>Regression Model Comparison</h3>
-      <a href="regression/README.md">
-        <img src="regression/images/supervised_regression_model_comparison.png" alt="Supervised regression model comparison" width="100%">
-      </a>
-      <p><strong>Goal:</strong> predict diamond prices</p>
-      <p><strong>Primary metric:</strong> RMSE</p>
-      <p><strong>Best final model:</strong> Tuned Stacking Regressor</p>
-    </td>
-    <td width="50%" align="center">
-      <h3>Binary Classification Model Comparison</h3>
-      <a href="binary-classification/README.md">
-        <img src="binary-classification/images/supervised_binary_classification_model_comparison.png" alt="Supervised binary classification model comparison" width="100%">
-      </a>
-      <p><strong>Goal:</strong> predict higher-clarity diamond group</p>
-      <p><strong>Primary metric:</strong> F1-score</p>
-      <p><strong>Best final model:</strong> Tuned Stacking Classifier</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <a href="regression/README.md">
-        <img src="regression/images/supervised_regression_practical_comparison_table.png" alt="Practical comparison of regression models" width="100%">
-      </a>
-      <p><em>Practical regression comparison, including performance, runtime, prediction speed, and saved model size.</em></p>
-    </td>
-    <td width="50%" align="center">
-      <a href="binary-classification/README.md">
-        <img src="binary-classification/images/supervised_binary_classification_practical_comparison_table.png" alt="Practical comparison of binary classification models" width="100%">
-      </a>
-      <p><em>Practical classification comparison, including performance, runtime, prediction speed, and saved model size.</em></p>
-    </td>
-  </tr>
-</table>
-
----
-
 ## Project Purpose
 
 The main goal of this repository is not only to find a single best-performing model, but to compare many supervised machine learning algorithms in a consistent, practical, and reproducible way.
@@ -303,57 +260,29 @@ The primary comparison metric is **F1-score**, while ROC-AUC, precision, recall,
 
 ## Example Visual Summaries
 
-The detailed project README files contain the full visual output lists. The examples below show the main summary visuals from each project.
+The main visual examples are organised in a balanced way across both projects.
 
-### Regression: Tuned Model Comparison
+Each row compares the same type of output from the regression project and the binary classification project:
 
-![Tuned Regression Model Comparison](regression/images/supervised_regression_model_comparison.png)
+- full tuned model comparison
+- practical model selection comparison
+- best-model prediction behaviour
+- best-model error analysis
+- permutation importance
 
-### Regression: Practical Comparison
+This keeps the two completed projects structurally comparable while still respecting the different nature of regression and classification tasks.
 
-![Practical Comparison of Regression Models](regression/images/supervised_regression_practical_comparison_table.png)
+### Balanced Visual Overview
 
-### Regression: Actual vs Predicted Values for All Tuned Models
+| Visual Focus | Regression Model Comparison | Binary Classification Model Comparison |
+|---|---|---|
+| **Full tuned model comparison** | ![Tuned Regression Model Comparison](regression/images/supervised_regression_model_comparison.png) | ![Tuned Binary Classification Model Comparison](binary-classification/images/supervised_binary_classification_model_comparison.png) |
+| **Practical model selection comparison** | ![Practical Comparison of Regression Models](regression/images/supervised_regression_practical_comparison_table.png) | ![Practical Comparison of Binary Classification Models](binary-classification/images/supervised_binary_classification_practical_comparison_table.png) |
+| **Best-model prediction behaviour** | ![Regression Best Model Actual vs Predicted](regression/images/supervised_regression_actual_vs_predicted_best_model.png) | ![Binary Classification Best Model Confusion Matrix](binary-classification/images/supervised_binary_classification_confusion_matrix_best_model.png) |
+| **Best-model error analysis** | ![Regression Best Model Residuals](regression/images/supervised_regression_residuals_best_model.png) | ![Binary Classification Best Model Errors](binary-classification/images/supervised_binary_classification_errors_best_model.png) |
+| **Best-model permutation importance** | ![Regression Permutation Importance](regression/images/supervised_regression_permutation_importance.png) | ![Binary Classification Permutation Importance](binary-classification/images/supervised_binary_classification_permutation_importance.png) |
 
-![Actual vs Predicted - Regression All Models](regression/images/supervised_regression_actual_vs_predicted_all_models.png)
-
-### Regression: Residual Distributions for All Tuned Models
-
-![Residual Distributions - Regression All Models](regression/images/supervised_regression_error_distribution_all_models.png)
-
-### Regression: Permutation Importance for the Best Model
-
-![Regression Permutation Importance](regression/images/supervised_regression_permutation_importance.png)
-
-### Binary Classification: Tuned Model Comparison
-
-![Tuned Binary Classification Model Comparison](binary-classification/images/supervised_binary_classification_model_comparison.png)
-
-### Binary Classification: Practical Comparison
-
-![Practical Comparison of Binary Classification Models](binary-classification/images/supervised_binary_classification_practical_comparison_table.png)
-
-### Binary Classification: Confusion Matrix for the Best Model
-
-![Binary Classification Confusion Matrix](binary-classification/images/supervised_binary_classification_confusion_matrix_best_model.png)
-
-### Binary Classification: ROC Curve for the Best Model
-
-![Binary Classification ROC Curve](binary-classification/images/supervised_binary_classification_roc_curve_best_model.png)
-
-### Binary Classification: Precision-Recall Curve for the Best Model
-
-![Binary Classification Precision-Recall Curve](binary-classification/images/supervised_binary_classification_precision_recall_curve_best_model.png)
-
-### Binary Classification: Decision Threshold Metrics Comparison
-
-![Decision Threshold Metrics Comparison](binary-classification/images/supervised_binary_classification_decision_threshold_metrics_comparison.png)
-
-### Binary Classification: Permutation Importance for the Best Model
-
-![Binary Classification Permutation Importance](binary-classification/images/supervised_binary_classification_permutation_importance.png)
-
----
+The detailed project README files include the full set of exported visuals and result tables.
 
 ## Model Families Compared
 
