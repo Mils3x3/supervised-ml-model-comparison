@@ -20,6 +20,49 @@ Both projects compare a wide range of supervised machine learning models using c
 
 ---
 
+## Visual Project Overview
+
+The repository contains two parallel supervised machine learning projects built on the same dataset: one regression workflow and one binary classification workflow. The visual summaries below highlight the main model comparison outputs from both projects.
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <h3>Regression Model Comparison</h3>
+      <a href="regression/README.md">
+        <img src="regression/images/supervised_regression_model_comparison.png" alt="Supervised regression model comparison" width="100%">
+      </a>
+      <p><strong>Goal:</strong> predict diamond prices</p>
+      <p><strong>Primary metric:</strong> RMSE</p>
+      <p><strong>Best final model:</strong> Tuned Stacking Regressor</p>
+    </td>
+    <td width="50%" align="center">
+      <h3>Binary Classification Model Comparison</h3>
+      <a href="binary-classification/README.md">
+        <img src="binary-classification/images/supervised_binary_classification_model_comparison.png" alt="Supervised binary classification model comparison" width="100%">
+      </a>
+      <p><strong>Goal:</strong> predict higher-clarity diamond group</p>
+      <p><strong>Primary metric:</strong> F1-score</p>
+      <p><strong>Best final model:</strong> Tuned Stacking Classifier</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="regression/README.md">
+        <img src="regression/images/supervised_regression_practical_comparison_table.png" alt="Practical comparison of regression models" width="100%">
+      </a>
+      <p><em>Practical regression comparison, including performance, runtime, prediction speed, and saved model size.</em></p>
+    </td>
+    <td width="50%" align="center">
+      <a href="binary-classification/README.md">
+        <img src="binary-classification/images/supervised_binary_classification_practical_comparison_table.png" alt="Practical comparison of binary classification models" width="100%">
+      </a>
+      <p><em>Practical classification comparison, including performance, runtime, prediction speed, and saved model size.</em></p>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## Project Purpose
 
 The main goal of this repository is not only to find a single best-performing model, but to compare many supervised machine learning algorithms in a consistent, practical, and reproducible way.
