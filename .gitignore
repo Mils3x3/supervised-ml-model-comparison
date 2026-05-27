@@ -91,7 +91,7 @@ conda-meta/
 !regression/results/
 !regression/results/*.csv
 
-# Future project section: keep when binary classification is added
+# Keep binary classification portfolio outputs that should be published
 !binary-classification/reports/
 !binary-classification/reports/*.html
 !binary-classification/images/

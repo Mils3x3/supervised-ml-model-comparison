@@ -1,8 +1,13 @@
 # Supervised Machine Learning Model Comparison
 
-A machine learning portfolio project focused on structured supervised model comparison.
+A machine learning portfolio project focused on structured supervised model comparison on tabular data.
 
-The current public version contains the completed **Regression Model Comparison** project, which compares a wide range of supervised regression models for predicting diamond prices. A **Binary Classification Model Comparison** project is planned as a future extension and will be added after the regression project is fully finalised.
+This repository contains two completed supervised learning projects using the `diamonds` dataset:
+
+- **Regression Model Comparison** – predicting diamond prices
+- **Binary Classification Model Comparison** – predicting whether a diamond belongs to a higher-clarity group
+
+Both projects compare a wide range of supervised machine learning models using consistent preprocessing, training, tuning, evaluation, export, and practical model selection workflows.
 
 ---
 
@@ -11,7 +16,7 @@ The current public version contains the completed **Regression Model Comparison*
 | Project | Status |
 |---|---|
 | Regression Model Comparison | Completed |
-| Binary Classification Model Comparison | Planned / not included yet |
+| Binary Classification Model Comparison | Completed |
 
 ---
 
@@ -19,18 +24,22 @@ The current public version contains the completed **Regression Model Comparison*
 
 The main goal of this repository is not only to find a single best-performing model, but to compare many supervised machine learning algorithms in a consistent, practical, and reproducible way.
 
-The regression project demonstrates:
+The projects demonstrate:
 
-- End-to-end supervised machine learning workflow
+- End-to-end supervised machine learning workflows
 - Data preprocessing with scikit-learn pipelines
 - Baseline model training
 - Hyperparameter tuning
 - Cross-validation
 - Final test-set evaluation
 - Practical model comparison
-- Prediction and residual analysis
+- Runtime and prediction speed comparison
+- Saved fitted model size comparison
+- Prediction, residual, and error analysis
+- Confusion matrix, ROC, and Precision-Recall analysis for classification
+- Decision threshold analysis for classification
 - Feature / permutation importance
-- Exported HTML report
+- Exported HTML reports
 - Portfolio-ready visual summaries and result tables
 
 ---
@@ -46,13 +55,36 @@ The best-performing model in the final regression comparison was the **Tuned Sta
 
 The **Tuned Stacking Regressor** achieved the best overall RMSE, while the **Tuned Voting Regressor** produced a very similar result and achieved the lowest MAE among the top models.
 
-The full notebook runtime for the final completed run was:
+The full notebook runtime for the final completed regression run was:
 
 ```text
 11:42:29
 ```
 
-From a practical model selection perspective, the best statistical model is not always the only reasonable choice. The project also considers training time, prediction time, saved model size, model complexity, and deployment practicality. In this context, models such as tuned LightGBM and tuned CatBoost can be attractive practical alternatives because they provide strong performance with simpler model artifacts than the largest ensemble combinations.
+From a practical model selection perspective, the best statistical model is not always the only reasonable choice. The regression project also considers training time, prediction time, saved fitted model size, model complexity, and deployment practicality. In this context, models such as tuned LightGBM and tuned CatBoost can be attractive practical alternatives because they provide strong performance with simpler model artifacts than the largest ensemble combinations.
+
+---
+
+## Final Binary Classification Result
+
+The best-performing model in the final binary classification comparison was the **Tuned Stacking Classifier**.
+
+| Model | Test Accuracy | Test Precision | Test Recall | Test F1-score | Test ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Tuned Stacking Classifier | 0.9122 | 0.8815 | 0.8624 | 0.8719 | 0.9682 |
+| Tuned Voting Classifier | 0.9118 | 0.8957 | 0.8434 | 0.8688 | 0.9673 |
+
+The **Tuned Stacking Classifier** achieved the best overall default-threshold test performance based on the primary F1-score metric.
+
+The **Tuned Voting Classifier** produced a very similar result and was the strongest fast ensemble alternative, with a much shorter measured model time.
+
+The full notebook runtime for the final completed binary classification run was:
+
+```text
+6:17:19
+```
+
+The decision threshold mini experiment showed that the tuned Stacking Classifier's F1-score could be slightly improved from **0.8719** to **0.8742** by lowering the decision threshold from **0.50** to **0.35**. This increased recall but reduced precision, showing the practical trade-off between false positives and false negatives.
 
 ---
 
@@ -67,37 +99,69 @@ supervised-ml-model-comparison/
 ├── README.md
 ├── requirements.txt
 │
-└── regression/
+├── regression/
+│   ├── README.md
+│   │
+│   ├── notebooks/
+│   │   └── supervised_regression_model_comparison.ipynb
+│   │
+│   ├── reports/
+│   │   └── supervised_regression_model_comparison.html
+│   │
+│   ├── images/
+│   │   ├── supervised_regression_model_comparison.png
+│   │   ├── supervised_regression_tuned_model_comparison_table.png
+│   │   ├── supervised_regression_practical_comparison_table.png
+│   │   ├── supervised_regression_selected_test_sample_predictions.png
+│   │   ├── supervised_regression_prediction_range_difference_summary.png
+│   │   ├── supervised_regression_best_model_performance_by_price_range.png
+│   │   ├── supervised_regression_actual_vs_predicted_best_model.png
+│   │   ├── supervised_regression_actual_vs_predicted_all_models.png
+│   │   ├── supervised_regression_actual_vs_predicted_distributions_by_model_group.png
+│   │   ├── supervised_regression_residuals_best_model.png
+│   │   ├── supervised_regression_residuals_all_models.png
+│   │   ├── supervised_regression_error_distribution_best_model.png
+│   │   ├── supervised_regression_error_distribution_all_models.png
+│   │   └── supervised_regression_permutation_importance.png
+│   │
+│   └── results/
+│       ├── supervised_regression_tuned_model_comparison_table.csv
+│       ├── supervised_regression_practical_comparison.csv
+│       ├── supervised_regression_selected_test_sample_predictions.csv
+│       ├── supervised_regression_prediction_range_difference_summary.csv
+│       └── supervised_regression_best_model_performance_by_price_range.csv
+│
+└── binary-classification/
     ├── README.md
     │
     ├── notebooks/
-    │   └── supervised_regression_model_comparison.ipynb
+    │   └── supervised_binary_classification_model_comparison.ipynb
     │
     ├── reports/
-    │   └── supervised_regression_model_comparison.html
+    │   └── supervised_binary_classification_model_comparison.html
     │
     ├── images/
-    │   ├── supervised_regression_model_comparison.png
-    │   ├── supervised_regression_tuned_model_comparison_table.png
-    │   ├── supervised_regression_practical_comparison_table.png
-    │   ├── supervised_regression_selected_test_sample_predictions.png
-    │   ├── supervised_regression_prediction_range_difference_summary.png
-    │   ├── supervised_regression_best_model_performance_by_price_range.png
-    │   ├── supervised_regression_actual_vs_predicted_best_model.png
-    │   ├── supervised_regression_actual_vs_predicted_all_models.png
-    │   ├── supervised_regression_actual_vs_predicted_distributions_by_model_group.png
-    │   ├── supervised_regression_residuals_best_model.png
-    │   ├── supervised_regression_residuals_all_models.png
-    │   ├── supervised_regression_error_distribution_best_model.png
-    │   ├── supervised_regression_error_distribution_all_models.png
-    │   └── supervised_regression_permutation_importance.png
+    │   ├── supervised_binary_classification_model_comparison.png
+    │   ├── supervised_binary_classification_tuned_model_comparison_table.png
+    │   ├── supervised_binary_classification_practical_comparison_table.png
+    │   ├── supervised_binary_classification_selected_test_sample_predictions.png
+    │   ├── supervised_binary_classification_prediction_agreement_error_summary.png
+    │   ├── supervised_binary_classification_best_model_performance_by_price_range.png
+    │   ├── supervised_binary_classification_confusion_matrix_best_model.png
+    │   ├── supervised_binary_classification_roc_curve_best_model.png
+    │   ├── supervised_binary_classification_precision_recall_curve_best_model.png
+    │   ├── supervised_binary_classification_decision_threshold_metrics_comparison.png
+    │   └── supervised_binary_classification_permutation_importance.png
     │
     └── results/
-        ├── supervised_regression_tuned_model_comparison_table.csv
-        ├── supervised_regression_practical_comparison.csv
-        ├── supervised_regression_selected_test_sample_predictions.csv
-        ├── supervised_regression_prediction_range_difference_summary.csv
-        └── supervised_regression_best_model_performance_by_price_range.csv
+        ├── supervised_binary_classification_tuned_model_comparison_table.csv
+        ├── supervised_binary_classification_practical_comparison.csv
+        ├── supervised_binary_classification_selected_test_sample_predictions.csv
+        ├── supervised_binary_classification_prediction_agreement_error_summary.csv
+        ├── supervised_binary_classification_best_model_performance_by_price_range.csv
+        ├── supervised_binary_classification_high_price_metrics_summary.csv
+        ├── supervised_binary_classification_decision_threshold_metrics_comparison.csv
+        └── supervised_binary_classification_decision_threshold_results.csv
 ```
 
 ---
@@ -135,68 +199,123 @@ The primary comparison metric is **RMSE**, while MAE, R², train-test gap, resid
 
 ---
 
-## Example Visual Summaries
+## Binary Classification Model Comparison
 
-### Tuned Regression Model Comparison
+The binary classification project compares a wide range of supervised binary classification models for predicting whether a diamond belongs to a higher-clarity group.
 
-![Tuned Regression Model Comparison](regression/images/supervised_regression_model_comparison.png)
+### Target Variable
 
-### Practical Comparison of Regression Models
+```text
+is_high_clarity
+```
 
-![Practical Comparison of Regression Models](regression/images/supervised_regression_practical_comparison_table.png)
+The target is created from the original `clarity` feature. The original `clarity` column is removed from the input features to prevent data leakage.
 
-### Actual vs Predicted Values for All Tuned Regression Models
+### Main Evaluation Metrics
 
-![Actual vs Predicted - All Models](regression/images/supervised_regression_actual_vs_predicted_all_models.png)
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- ROC-AUC
 
-### Residual Distributions for All Tuned Regression Models
+The primary comparison metric is **F1-score**, while ROC-AUC, precision, recall, confusion matrix behaviour, threshold behaviour, runtime, model size, and practical usability are also considered.
 
-![Residual Distributions - All Models](regression/images/supervised_regression_error_distribution_all_models.png)
+### Main Notebook
 
-### Permutation Importance for the Best Regression Model
+[supervised_binary_classification_model_comparison.ipynb](binary-classification/notebooks/supervised_binary_classification_model_comparison.ipynb)
 
-![Permutation Importance](regression/images/supervised_regression_permutation_importance.png)
+### HTML Report
+
+[supervised_binary_classification_model_comparison.html](binary-classification/reports/supervised_binary_classification_model_comparison.html)
+
+### Detailed Binary Classification README
+
+[Open the Binary Classification Project README](binary-classification/README.md)
 
 ---
 
-## Regression Models Compared
+## Example Visual Summaries
 
-The project compares a broad range of regression model families, including:
+### Regression: Tuned Model Comparison
 
-- Dummy Regressor
-- Linear Regression
-- Ridge Regression
-- Lasso Regression
-- ElasticNet
-- Bayesian Ridge
-- RANSAC Regressor
-- Huber Regressor
-- SGD Regressor
-- Passive Aggressive Regressor
-- Poisson Regressor
-- Gamma Regressor
-- Quantile Regressor
-- Support Vector Regression
-- K-Nearest Neighbors Regressor
-- Decision Tree Regressor
-- Random Forest Regressor
-- Extra Trees Regressor
-- AdaBoost Regressor
-- Gradient Boosting Regressor
-- HistGradientBoosting Regressor
-- XGBoost Regressor
-- LightGBM Regressor
-- CatBoost Regressor
-- Bagging Regressor
-- Voting Regressor
-- Stacking Regressor
-- MLP Regressor
+![Tuned Regression Model Comparison](regression/images/supervised_regression_model_comparison.png)
+
+### Regression: Practical Comparison
+
+![Practical Comparison of Regression Models](regression/images/supervised_regression_practical_comparison_table.png)
+
+### Regression: Actual vs Predicted Values for All Tuned Models
+
+![Actual vs Predicted - Regression All Models](regression/images/supervised_regression_actual_vs_predicted_all_models.png)
+
+### Regression: Residual Distributions for All Tuned Models
+
+![Residual Distributions - Regression All Models](regression/images/supervised_regression_error_distribution_all_models.png)
+
+### Regression: Permutation Importance for the Best Model
+
+![Regression Permutation Importance](regression/images/supervised_regression_permutation_importance.png)
+
+### Binary Classification: Tuned Model Comparison
+
+![Tuned Binary Classification Model Comparison](binary-classification/images/supervised_binary_classification_model_comparison.png)
+
+### Binary Classification: Practical Comparison
+
+![Practical Comparison of Binary Classification Models](binary-classification/images/supervised_binary_classification_practical_comparison_table.png)
+
+### Binary Classification: Confusion Matrix for the Best Model
+
+![Binary Classification Confusion Matrix](binary-classification/images/supervised_binary_classification_confusion_matrix_best_model.png)
+
+### Binary Classification: ROC Curve for the Best Model
+
+![Binary Classification ROC Curve](binary-classification/images/supervised_binary_classification_roc_curve_best_model.png)
+
+### Binary Classification: Precision-Recall Curve for the Best Model
+
+![Binary Classification Precision-Recall Curve](binary-classification/images/supervised_binary_classification_precision_recall_curve_best_model.png)
+
+### Binary Classification: Decision Threshold Metrics Comparison
+
+![Decision Threshold Metrics Comparison](binary-classification/images/supervised_binary_classification_decision_threshold_metrics_comparison.png)
+
+### Binary Classification: Permutation Importance for the Best Model
+
+![Binary Classification Permutation Importance](binary-classification/images/supervised_binary_classification_permutation_importance.png)
+
+---
+
+## Model Families Compared
+
+Across the two projects, the repository compares a broad range of supervised model families, including:
+
+- Baseline models
+- Linear and regularized linear models
+- Robust and online linear models
+- GLM / distribution-based linear models
+- Logistic and regularized logistic models
+- Support vector / margin-based models
+- Distance-based models
+- Probabilistic models
+- Discriminant analysis models
+- Tree-based models
+- Random forest and extra trees models
+- Bagging models
+- Boosting models
+- XGBoost models
+- LightGBM models
+- CatBoost models
+- Voting ensembles
+- Stacking ensembles
+- MLP neural network models
 
 ---
 
 ## Machine Learning Workflow
 
-The regression notebook follows this workflow:
+Both notebooks follow a consistent supervised learning workflow:
 
 1. Load and inspect the dataset
 2. Define the target variable
@@ -204,25 +323,34 @@ The regression notebook follows this workflow:
 4. Build preprocessing pipelines
 5. Train baseline models
 6. Evaluate baseline performance
-7. Tune selected models
+7. Tune selected models with cross-validation
 8. Compare tuned models
 9. Evaluate final models on the test set
 10. Save selected result tables and visual outputs
 11. Analyse prediction behaviour
-12. Analyse residuals and residual distributions
+12. Analyse residuals, errors, or classification mistakes
 13. Review practical strengths and weaknesses of the models
 14. Compare runtime, model complexity, and saved fitted model size
 15. Interpret permutation importance for the best model
+
+The binary classification project also includes:
+
+- Confusion matrix analysis
+- ROC curve analysis
+- Precision-Recall curve analysis
+- Prediction agreement and error analysis
+- High-price classification analysis
+- Decision threshold analysis
 
 ---
 
 ## Voting and Stacking Strategy
 
-The project uses a two-stage ensemble strategy for Voting and Stacking.
+Both projects use a two-stage ensemble strategy for Voting and Stacking.
 
-The initial Voting and Stacking regressors are built from selected untuned model pipelines.
+The initial Voting and Stacking models are built from selected untuned model pipelines.
 
-The tuned Voting and Stacking regressors are built from the best estimators found by earlier hyperparameter searches. No additional Voting weight search or Stacking final-estimator grid search is applied in the final version, because these extra searches were computationally expensive and produced only small improvements in previous runs.
+The tuned Voting and Stacking models are built from the best estimators found by earlier hyperparameter searches. No additional Voting weight search or Stacking final-estimator grid search is applied in the final version, because these extra searches were computationally expensive and produced only small improvements in previous runs.
 
 This keeps the comparison clear:
 
@@ -233,9 +361,9 @@ This keeps the comparison clear:
 
 ## Practical Model Selection
 
-The project does not select a model based only on the lowest error score.
+The repository does not select models based only on the lowest error score or the highest classification metric.
 
-Although the **Tuned Stacking Regressor** achieved the best RMSE, practical model selection may also depend on:
+Practical model selection may also depend on:
 
 - training time
 - prediction time
@@ -247,7 +375,7 @@ Although the **Tuned Stacking Regressor** achieved the best RMSE, practical mode
 
 This means that a slightly less accurate model may still be a better practical choice in some real-world situations.
 
-For example, tuned LightGBM and tuned CatBoost offer strong predictive performance while remaining simpler than the largest ensemble combinations. The tuned Voting Regressor is also a strong ensemble alternative, but it can create a larger model artifact because it contains multiple component models.
+For example, the tuned Stacking models achieved the strongest overall performance in both projects, while the tuned Voting models were very close ensemble alternatives. However, individual boosting models such as tuned LightGBM, tuned CatBoost, tuned Hist Gradient Boosting, and tuned XGBoost can be attractive practical alternatives because they provide strong performance with simpler model artifacts than the largest ensemble combinations.
 
 ---
 
@@ -285,13 +413,14 @@ Then start Jupyter Notebook:
 jupyter notebook
 ```
 
-Open:
+Open one of the project notebooks:
 
 ```text
 regression/notebooks/supervised_regression_model_comparison.ipynb
+binary-classification/notebooks/supervised_binary_classification_model_comparison.ipynb
 ```
 
-Run the notebook from top to bottom.
+Run the selected notebook from top to bottom.
 
 ### Alternative: pip
 
@@ -309,21 +438,18 @@ The conda environment is recommended because this project uses several machine l
 
 This repository is designed as a portfolio project.
 
-The notebook shows not only final results, but also the modelling process, tuning logic, practical comparison, prediction analysis, residual analysis, runtime considerations, saved model artifacts, and visual interpretation.
+The notebooks show not only final results, but also the modelling process, tuning logic, practical comparison, prediction analysis, residual or classification error analysis, runtime considerations, saved model artifacts, and visual interpretation.
 
-The HTML report is included to make the project easier to review without running the notebook locally.
+The HTML reports are included to make the projects easier to review without running the notebooks locally.
 
----
+The final completed notebook runtimes were:
 
-## Planned Extension
+| Project | Full Notebook Runtime |
+|---|---:|
+| Regression Model Comparison | 11:42:29 |
+| Binary Classification Model Comparison | 6:17:19 |
 
-A Binary Classification Model Comparison project is planned as a future extension of this repository.
-
-When completed, it will be added under:
-
-```text
-binary-classification/
-```
+Runtime may vary depending on hardware, package versions, parallel processing configuration, and whether saved model artifacts are reloaded.
 
 ---
 

@@ -7,36 +7,28 @@ dependencies:
   # Python
   - python=3.11
 
-  # Jupyter
-  - jupyterlab
-  - notebook
-  - ipykernel
-
-  # Core data science
+  # Core data science libraries
   - numpy
   - pandas
+  - scipy
+  - packaging
+
+  # Visualisation
   - matplotlib
   - seaborn
-  - scikit-learn
-  - scipy
 
-  # Model training and tuning
+  # Machine learning
+  - scikit-learn
   - xgboost
   - lightgbm
-  - catboost=1.2.10
-  - optuna
-  - scikit-optimize
+  - catboost
 
-  # Utilities
+  # Model saving, loading and environment summary
   - joblib
-  - threadpoolctl
   - psutil
 
-  # Excel / table export support
-  - openpyxl
-  - dataframe_image
-  - lxml
-
-  # Optional visualization support
-  - graphviz
-  - python-graphviz
+  # Jupyter environment and HTML export
+  - jupyter
+  - notebook
+  - ipykernel
+  - nbconvert

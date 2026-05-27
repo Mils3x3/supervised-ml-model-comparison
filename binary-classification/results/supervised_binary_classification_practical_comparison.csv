@@ -1,0 +1,31 @@
+﻿Model,Released,Predictive Strength,Base Fit Speed,Prediction Speed,Tuning Cost,Memory Use,Overfit,Scaling Sensitivity,Need Scaling?,Hyperparam Sensitivity,External Library?,Can Continue Training?,Continue Training Method,Short Description
+Dummy Classifier,2010,1,10,10,1,1,1,1,No,1,No,No,-,Naive baseline model
+Logistic Regression L2,2010,7,10,10,3,2,2,7,Yes / recommended,5,No,No,-,Regularized linear classifier
+Logistic Regression L1,2010,7,9,10,4,2,2,8,Yes / recommended,6,No,No,-,Sparse logistic model with feature selection
+Logistic Regression ElasticNet,2010,8,8,10,5,3,2,8,Yes / recommended,8,No,No,-,Combines L1 and L2 regularization
+Ridge Classifier,2010,7,10,10,2,2,1,7,Yes / recommended,4,No,No,-,L2-regularized linear classifier
+SGD Classifier,2010,7,10,10,5,1,4,9,Yes,8,No,Yes,"`partial_fit(X, y)`",Online linear classifier trained with SGD
+Passive Aggressive Classifier,2010,6,10,10,4,1,5,9,Yes,7,No,Yes,"`partial_fit(X, y)`",Online margin-based classifier
+Linear SVC,2010,8,9,10,5,3,3,8,Yes,7,No,No,-,Fast linear support vector classifier
+SVC (linear),2010,8,3,4,8,5,3,8,Yes,7,No,No,-,Kernel SVC with linear decision boundary
+SVC (RBF),2010,9,2,2,10,8,8,10,Yes,10,No,No,-,Nonlinear kernel support vector classifier
+KNeighbors Classifier,2010,7,10,5,5,8,8,10,Yes,6,No,No,-,Distance-based classifier
+Nearest Centroid Classifier,2010,5,10,10,2,1,1,8,Yes / recommended,3,No,No,-,Simple centroid-based classifier
+Gaussian NB,2010,5,10,10,2,1,1,5,Usually helpful,3,No,Yes,"`partial_fit(X, y)`",Probabilistic Naive Bayes for Gaussian features
+Bernoulli NB,2010,5,10,10,3,1,1,4,Depends,4,No,Yes,"`partial_fit(X, y)`",Naive Bayes for binary features
+Linear Discriminant Analysis,2010,7,10,10,3,3,2,6,Yes / recommended,5,No,No,-,Linear discriminant classifier
+Quadratic Discriminant Analysis,2010,7,9,10,4,4,6,6,Yes / recommended,6,No,No,-,Quadratic discriminant classifier
+Decision Tree Classifier,2010,7,10,10,4,3,10,1,No,5,No,No,-,Single tree-based classifier
+Extra Tree Classifier,2010,6,10,10,4,3,10,1,No,5,No,No,-,Highly randomized single decision tree
+Random Forest Classifier,2010,9,8,9,6,7,4,1,No,6,No,Yes,`warm_start=True`,Bagged ensemble of decision trees
+Extra Trees Classifier,2010,9,9,9,5,7,4,1,No,5,No,Yes,`warm_start=True`,Strongly randomized tree ensemble
+AdaBoost Classifier,2010,7,9,10,6,4,6,2,No,7,No,No,-,Sequential boosting classifier
+Gradient Boosting Classifier,2010,9,6,9,8,5,8,2,No,9,No,Yes,`warm_start=True`,Classic gradient boosting classifier
+Hist Gradient Boosting Classifier,2019,9,10,10,6,5,7,2,No,7,No,Yes,`warm_start=True`,Fast histogram-based boosting classifier
+XGBoost Classifier,2014,10,10,10,7,7,8,2,No,9,Yes (xgboost),Yes,"`fit(X, y, xgb_model=old_model)`",Powerful regularized boosting classifier
+LightGBM Classifier,2017,10,10,10,6,5,8,2,No,8,Yes (lightgbm),Yes,"`fit(X, y, init_model=old_model)`",Very fast boosting classifier
+CatBoost Classifier,2017,10,9,10,6,6,7,2,No / native cat support,7,Yes (catboost),Yes,"`fit(X, y, init_model=old_model)`","Strong boosting model, good with categorical data"
+MLP Classifier,2010,8,3,10,8,6,8,10,Yes,9,No,Yes,"`partial_fit(X, y)`",Neural network classifier
+Bagging Classifier,2010,8,7,8,5,6,Depends,Depends,Depends,5,No,No,-,Ensemble of bootstrap-trained models
+Voting Classifier,2015,8,5,8,4,6,Depends,Depends,Depends,5,No,No,-,Soft voting ensemble of six strong tuned models
+Stacking Classifier,2019,9,3,8,7,8,Depends,Depends,Depends,9,No,No,-,Multi-level ensemble using six strong tuned models plus MLP
