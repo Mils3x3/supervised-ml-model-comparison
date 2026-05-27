@@ -25,7 +25,7 @@ The project compares models by:
 - Practical strengths and weaknesses
 - Prediction agreement and error behaviour
 - Performance across price ranges
-- High-price classification behaviour
+- Performance on a high-price subset
 - Confusion matrix behaviour
 - ROC and Precision-Recall curve behaviour
 - Decision threshold behaviour
@@ -39,7 +39,7 @@ This project uses the diamonds dataset.
 
 The dataset contains physical and categorical information about diamonds, such as size, quality, and dimensions.
 
-Typical features include:
+Typical columns include:
 
 - carat
 - cut
@@ -47,9 +47,12 @@ Typical features include:
 - clarity
 - depth
 - table
+- price
 - x
 - y
 - z
+
+The `clarity` column is used to create the binary target variable, but it is removed from the model input features before training to prevent data leakage.
 
 ---
 
@@ -136,11 +139,11 @@ Best model performance by price range.
 
 [results/supervised_binary_classification_high_price_metrics_summary.csv](results/supervised_binary_classification_high_price_metrics_summary.csv)
 
-High-price classification performance summary.
+Best model performance summary on the high-price subset.
 
 [results/supervised_binary_classification_high_price_class_distribution.csv](results/supervised_binary_classification_high_price_class_distribution.csv)
 
-Class distribution summary for the high-price subset.
+Class distribution summary within the high-price subset.
 
 [results/supervised_binary_classification_high_price_confusion_matrix.csv](results/supervised_binary_classification_high_price_confusion_matrix.csv)
 
@@ -267,7 +270,7 @@ The project follows this workflow:
 15. Analyse selected test sample predictions
 16. Analyse prediction agreement and error behaviour
 17. Analyse actual vs predicted class behaviour
-18. Analyse price-range and high-price classification performance
+18. Analyse price-range performance and high-price subset behaviour
 19. Analyse confusion matrices
 20. Analyse ROC curves and Precision-Recall curves
 21. Compare practical strengths and weaknesses of the models
@@ -322,17 +325,17 @@ This keeps the comparison clear:
 
 ![Best Model Performance by Price Range](images/supervised_binary_classification_best_model_performance_by_price_range.png)
 
-### High-Price Metrics Summary
+### High-Price Subset Metrics Summary
 
-![High-Price Metrics Summary](images/supervised_binary_classification_high_price_metrics_summary.png)
+![High-Price Subset Metrics Summary](images/supervised_binary_classification_high_price_metrics_summary.png)
 
-### High-Price Class Distribution
+### High-Price Subset Class Distribution
 
-![High-Price Class Distribution](images/supervised_binary_classification_high_price_class_distribution.png)
+![High-Price Subset Class Distribution](images/supervised_binary_classification_high_price_class_distribution.png)
 
-### High-Price Confusion Matrix
+### High-Price Subset Confusion Matrix
 
-![High-Price Confusion Matrix](images/supervised_binary_classification_high_price_confusion_matrix.png)
+![High-Price Subset Confusion Matrix](images/supervised_binary_classification_high_price_confusion_matrix.png)
 
 ### Confusion Matrix for the Best Classification Model
 
@@ -484,6 +487,7 @@ This project demonstrates the ability to:
 - Analyse prediction agreement and error behaviour
 - Analyse confusion matrices, ROC curves, and Precision-Recall curves
 - Compare model behaviour across different price ranges
+- Analyse performance on a high-price subset
 - Compare runtime, practical usability, and saved fitted model size
 - Explore the effect of decision threshold adjustment
 - Save selected results, reports, and visual outputs
