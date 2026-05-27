@@ -1,6 +1,6 @@
 # Supervised Machine Learning Model Comparison
 
-A machine learning portfolio project focused on structured supervised model comparison on tabular data.
+A machine learning portfolio repository focused on structured supervised model comparison on tabular data.
 
 This repository contains two completed supervised learning projects using the `diamonds` dataset:
 
@@ -13,10 +13,10 @@ Both projects compare a wide range of supervised machine learning models using c
 
 ## Current Project Status
 
-| Project | Status |
-|---|---|
-| Regression Model Comparison | Completed |
-| Binary Classification Model Comparison | Completed |
+| Project | Type | Status | Detailed README |
+|---|---|---|---|
+| Regression Model Comparison | Supervised Regression | Completed | [regression/README.md](regression/README.md) |
+| Binary Classification Model Comparison | Supervised Binary Classification | Completed | [binary-classification/README.md](binary-classification/README.md) |
 
 ---
 
@@ -41,6 +41,16 @@ The projects demonstrate:
 - Feature / permutation importance
 - Exported HTML reports
 - Portfolio-ready visual summaries and result tables
+
+---
+
+## Dataset
+
+Both projects use the `diamonds` dataset.
+
+The dataset contains information about diamonds, including physical measurements and quality-related attributes such as carat, cut, colour, clarity, depth, table, dimensions, and price.
+
+The same dataset is used for both projects so that the focus remains on comparing supervised learning approaches rather than changing the data source.
 
 ---
 
@@ -91,7 +101,7 @@ The decision threshold mini experiment showed that the tuned Stacking Classifier
 ## Repository Structure
 
 ```text
-supervised-ml-model-comparison/
+ml-supervised-model-comparison/
 ├── .gitattributes
 ├── .gitignore
 ├── COPYRIGHT.md
@@ -141,28 +151,65 @@ supervised-ml-model-comparison/
     │   └── supervised_binary_classification_model_comparison.html
     │
     ├── images/
-    │   ├── supervised_binary_classification_model_comparison.png
-    │   ├── supervised_binary_classification_tuned_model_comparison_table.png
-    │   ├── supervised_binary_classification_practical_comparison_table.png
-    │   ├── supervised_binary_classification_selected_test_sample_predictions.png
-    │   ├── supervised_binary_classification_prediction_agreement_error_summary.png
+    │   ├── supervised_binary_classification_actual_vs_predicted_all_models.png
+    │   ├── supervised_binary_classification_actual_vs_predicted_best_model.png
+    │   ├── supervised_binary_classification_best_model_correctness_check.png
     │   ├── supervised_binary_classification_best_model_performance_by_price_range.png
+    │   ├── supervised_binary_classification_confusion_matrices_all_models.png
     │   ├── supervised_binary_classification_confusion_matrix_best_model.png
-    │   ├── supervised_binary_classification_roc_curve_best_model.png
-    │   ├── supervised_binary_classification_precision_recall_curve_best_model.png
     │   ├── supervised_binary_classification_decision_threshold_metrics_comparison.png
-    │   └── supervised_binary_classification_permutation_importance.png
+    │   ├── supervised_binary_classification_decision_threshold_results.png
+    │   ├── supervised_binary_classification_decision_threshold_summary.png
+    │   ├── supervised_binary_classification_errors_all_models.png
+    │   ├── supervised_binary_classification_errors_best_model.png
+    │   ├── supervised_binary_classification_high_price_class_distribution.png
+    │   ├── supervised_binary_classification_high_price_confusion_matrix.png
+    │   ├── supervised_binary_classification_high_price_metrics_summary.png
+    │   ├── supervised_binary_classification_model_comparison.png
+    │   ├── supervised_binary_classification_permutation_importance.png
+    │   ├── supervised_binary_classification_practical_comparison_table.png
+    │   ├── supervised_binary_classification_precision_recall_curve_all_models.png
+    │   ├── supervised_binary_classification_precision_recall_curve_best_model.png
+    │   ├── supervised_binary_classification_precision_recall_curve_by_model_family.png
+    │   ├── supervised_binary_classification_precision_recall_curve_individual_models.png
+    │   ├── supervised_binary_classification_prediction_agreement_error_summary.png
+    │   ├── supervised_binary_classification_roc_curve_all_models.png
+    │   ├── supervised_binary_classification_roc_curve_best_model.png
+    │   ├── supervised_binary_classification_roc_curve_by_model_family.png
+    │   ├── supervised_binary_classification_roc_curve_individual_models.png
+    │   ├── supervised_binary_classification_selected_test_sample_predictions.png
+    │   └── supervised_binary_classification_tuned_model_comparison_table.png
     │
     └── results/
-        ├── supervised_binary_classification_tuned_model_comparison_table.csv
-        ├── supervised_binary_classification_practical_comparison.csv
-        ├── supervised_binary_classification_selected_test_sample_predictions.csv
-        ├── supervised_binary_classification_prediction_agreement_error_summary.csv
+        ├── supervised_binary_classification_best_model_correctness_check.csv
         ├── supervised_binary_classification_best_model_performance_by_price_range.csv
-        ├── supervised_binary_classification_high_price_metrics_summary.csv
         ├── supervised_binary_classification_decision_threshold_metrics_comparison.csv
-        └── supervised_binary_classification_decision_threshold_results.csv
+        ├── supervised_binary_classification_decision_threshold_results.csv
+        ├── supervised_binary_classification_decision_threshold_summary.csv
+        ├── supervised_binary_classification_high_price_class_distribution.csv
+        ├── supervised_binary_classification_high_price_confusion_matrix.csv
+        ├── supervised_binary_classification_high_price_metrics_summary.csv
+        ├── supervised_binary_classification_practical_comparison.csv
+        ├── supervised_binary_classification_prediction_agreement_error_summary.csv
+        ├── supervised_binary_classification_selected_test_sample_predictions.csv
+        └── supervised_binary_classification_tuned_model_comparison_table.csv
 ```
+
+---
+
+## Project Files
+
+### Regression
+
+- Main notebook: [supervised_regression_model_comparison.ipynb](regression/notebooks/supervised_regression_model_comparison.ipynb)
+- HTML report: [supervised_regression_model_comparison.html](regression/reports/supervised_regression_model_comparison.html)
+- Detailed README: [regression/README.md](regression/README.md)
+
+### Binary Classification
+
+- Main notebook: [supervised_binary_classification_model_comparison.ipynb](binary-classification/notebooks/supervised_binary_classification_model_comparison.ipynb)
+- HTML report: [supervised_binary_classification_model_comparison.html](binary-classification/reports/supervised_binary_classification_model_comparison.html)
+- Detailed README: [binary-classification/README.md](binary-classification/README.md)
 
 ---
 
@@ -184,18 +231,6 @@ price
 - R² Score
 
 The primary comparison metric is **RMSE**, while MAE, R², train-test gap, residual behaviour, runtime, model size, and practical usability are also considered.
-
-### Main Notebook
-
-[supervised_regression_model_comparison.ipynb](regression/notebooks/supervised_regression_model_comparison.ipynb)
-
-### HTML Report
-
-[supervised_regression_model_comparison.html](regression/reports/supervised_regression_model_comparison.html)
-
-### Detailed Regression README
-
-[Open the Regression Project README](regression/README.md)
 
 ---
 
@@ -221,21 +256,11 @@ The target is created from the original `clarity` feature. The original `clarity
 
 The primary comparison metric is **F1-score**, while ROC-AUC, precision, recall, confusion matrix behaviour, threshold behaviour, runtime, model size, and practical usability are also considered.
 
-### Main Notebook
-
-[supervised_binary_classification_model_comparison.ipynb](binary-classification/notebooks/supervised_binary_classification_model_comparison.ipynb)
-
-### HTML Report
-
-[supervised_binary_classification_model_comparison.html](binary-classification/reports/supervised_binary_classification_model_comparison.html)
-
-### Detailed Binary Classification README
-
-[Open the Binary Classification Project README](binary-classification/README.md)
-
 ---
 
 ## Example Visual Summaries
+
+The detailed project README files contain the full visual output lists. The examples below show the main summary visuals from each project.
 
 ### Regression: Tuned Model Comparison
 
@@ -339,7 +364,7 @@ The binary classification project also includes:
 - ROC curve analysis
 - Precision-Recall curve analysis
 - Prediction agreement and error analysis
-- High-price classification analysis
+- High-price subset analysis
 - Decision threshold analysis
 
 ---
@@ -450,6 +475,8 @@ The final completed notebook runtimes were:
 | Binary Classification Model Comparison | 6:17:19 |
 
 Runtime may vary depending on hardware, package versions, parallel processing configuration, and whether saved model artifacts are reloaded.
+
+This repository does not include the saved fitted model artifacts or local `_exports` folders. The published version focuses on the notebooks, HTML reports, result tables, visual outputs, and documentation.
 
 ---
 
