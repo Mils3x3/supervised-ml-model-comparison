@@ -119,7 +119,7 @@ Tuned binary classification model comparison table.
 
 [results/supervised_binary_classification_practical_comparison.csv](results/supervised_binary_classification_practical_comparison.csv)
 
-Practical comparison table describing model behaviour, usability, speed, memory usage, tuning cost, overfitting tendency, scaling sensitivity, threshold behaviour, and historical model context.
+Practical comparison table describing model behaviour, usability, fit speed, prediction speed, memory efficiency, overfitting resistance, scaling robustness, scaling requirements, external library requirements, continued training support, probability output support, threshold adjustment suitability, and historical model context.
 
 [results/supervised_binary_classification_selected_test_sample_predictions.csv](results/supervised_binary_classification_selected_test_sample_predictions.csv)
 
@@ -417,30 +417,28 @@ In addition to numerical performance, the project includes a practical compariso
 
 The practical comparison considers:
 
-- Approximate historical release / origin year
-- Predictive performance
-- Base fit speed
+- Approximate historical origin / reference year
+- Classification performance
+- Fit speed
 - Prediction speed
-- Tuning cost
-- Memory use
-- Saved fitted model file size
-- Overfitting tendency
-- Scaling sensitivity
+- Memory efficiency
+- Overfitting resistance
+- Scaling robustness
 - Whether scaling is required or recommended
-- Hyperparameter sensitivity
 - External library requirement
 - Whether the model can continue training
+- Continued training method, where applicable
 - Probability output support
 - Threshold adjustment suitability
 - Practical summary of each model
 
-The practical scores are project-based ratings on a 0–10 scale. They reflect the behaviour observed in this notebook and are intended as practical guidance for this project, not as universal theoretical rankings.
+The practical scores are project-based ratings on a **1–10 scale**, where **10 always means better / more favourable**. They reflect the behaviour observed in this notebook, together with practical modelling experience gained during this project. They are intended as practical guidance for this project, not as universal theoretical rankings.
 
 ---
 
 ## Practical Model Selection
 
-Model selection is not only about predictive accuracy. In practical machine learning workflows, runtime, prediction speed, file size, memory use, threshold behaviour, and deployment complexity can also influence which model is the best choice.
+Model selection is not only about predictive accuracy. In practical machine learning workflows, runtime, prediction speed, file size, memory requirements, threshold behaviour, and deployment complexity can also influence which model is the best choice.
 
 The saved fitted model file sizes add a useful practical perspective to the final comparison. They give an approximate indication of how large each trained model artifact is when saved and reused. This is important because a highly accurate model may not always be the most practical option if it is slow to train, slow to predict, large to store, or more complex to deploy.
 

@@ -8129,7 +8129,7 @@ Measures how much of the variance in the target variable is explained by the mod
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="GitHub-portfolio-export-paths">GitHub portfolio export paths<a class="anchor-link" href="#GitHub-portfolio-export-paths">¶</a></h3>
+<h3 id="Portfolio-export-paths">Portfolio export paths<a class="anchor-link" href="#Portfolio-export-paths">¶</a></h3>
 </div>
 </div>
 </div>
@@ -49897,18 +49897,79 @@ forceTheme('sk-container-id-3');</script></body>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Meaning-of-the-Practical-Comparison-Table">Meaning of the Practical Comparison Table<a class="anchor-link" href="#Meaning-of-the-Practical-Comparison-Table">¶</a></h3><p>This practical comparison table provides a project-based overview of the regression models used in this notebook.</p>
-<p>The <code>Released</code> column refers to the approximate historical origin of the algorithm, model family, or main method behind the estimator. It is included to show the development of supervised machine learning methods over time. These years are historical reference points, not necessarily the release dates of the specific scikit-learn, XGBoost, LightGBM, or CatBoost implementations used in this project.</p>
-<p>The practical scores are based on a 0–10 scale and reflect the behaviour observed in this notebook. They are intended as practical guidance for this project, not as universal theoretical rankings.</p>
-<h3 id="Meaning-of-the-Rating-Scales">Meaning of the Rating Scales<a class="anchor-link" href="#Meaning-of-the-Rating-Scales">¶</a></h3><ul>
-<li>Performance (1–10) → 10 = very strong predictive performance</li>
-<li>Base Fit Speed (1–10) → 10 = very fast model training</li>
-<li>Prediction Speed (1–10) → 10 = very fast prediction</li>
-<li>Tuning Cost (1–10) → 10 = very expensive and time-consuming to tune</li>
-<li>Memory Use (1–10) → 10 = requires a lot of memory</li>
-<li>Overfit (1–10) → 10 = easily overfits</li>
-<li>Scaling Sensitivity (1–10) → 10 = likely to perform worse without scaling</li>
-<li>Hyperparam Sensitivity (1–10) → 10 = easy to misconfigure</li>
-</ul>
+<p>The <strong>Released</strong> column refers to the approximate historical origin of the algorithm, model family, or main method behind the estimator. It is included to show the development of supervised machine learning methods over time. These years are historical reference points, not necessarily the release dates of the specific scikit-learn, XGBoost, LightGBM, or CatBoost implementations used in this project.</p>
+<p>The practical scores are based on a <strong>1–10 scale</strong> and reflect the behaviour observed in this notebook. They are intended as practical guidance for this project, not as universal theoretical rankings.</p>
+<h3 id="Meaning-of-the-Practical-Rating-Scales">Meaning of the Practical Rating Scales<a class="anchor-link" href="#Meaning-of-the-Practical-Rating-Scales">¶</a></h3><p>All numerical practical ratings use a <strong>1–10 scale</strong>, where <strong>10 always means better / more favourable</strong>.</p>
+<table style="margin-left:0; margin-right:auto; border-collapse:collapse; text-align:left;">
+<thead>
+<tr>
+<th style="text-align:left;">Column</th>
+<th style="text-align:left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Performance (1–10)</strong></td>
+<td>10 = very strong predictive performance in this project</td>
+</tr>
+<tr>
+<td><strong>Fit Speed (1–10)</strong></td>
+<td>10 = very fast model fitting / training based on the behaviour observed in this project</td>
+</tr>
+<tr>
+<td><strong>Prediction Speed (1–10)</strong></td>
+<td>10 = very fast prediction</td>
+</tr>
+<tr>
+<td><strong>Memory Efficiency (1–10)</strong></td>
+<td>10 = low memory use / lightweight fitted model behaviour</td>
+</tr>
+<tr>
+<td><strong>Overfitting Resistance (1–10)</strong></td>
+<td>10 = low tendency to overfit</td>
+</tr>
+<tr>
+<td><strong>Scaling Robustness (1–10)</strong></td>
+<td>10 = works well without being highly dependent on feature scaling</td>
+</tr>
+</tbody>
+</table>
+<p>The practical ratings are based on the behaviour observed in this project. They are intended as project-specific guidance, not universal theoretical rankings.</p>
+<p>Non-numerical columns provide additional practical context:</p>
+<table style="margin-left:0; margin-right:auto; border-collapse:collapse; text-align:left;">
+<thead>
+<tr>
+<th style="text-align:left;">Column</th>
+<th style="text-align:left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Released</strong></td>
+<td>Approximate historical origin of the algorithm, model family, or main method behind the estimator</td>
+</tr>
+<tr>
+<td><strong>Need Scaling?</strong></td>
+<td>Whether feature scaling is required, recommended, not required, or depends on the model setup</td>
+</tr>
+<tr>
+<td><strong>External Library?</strong></td>
+<td>Whether the model requires an external machine learning library outside core scikit-learn</td>
+</tr>
+<tr>
+<td><strong>Can Continue Training?</strong></td>
+<td>Whether the model supports some form of continued or incremental training</td>
+</tr>
+<tr>
+<td><strong>Continue Training Method</strong></td>
+<td>The method used for continued training, if supported</td>
+</tr>
+<tr>
+<td><strong>Short Description</strong></td>
+<td>A short practical summary of the model type</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -49917,7 +49978,7 @@ forceTheme('sk-container-id-3');</script></body>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [647]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
@@ -49931,38 +49992,38 @@ forceTheme('sk-container-id-3');</script></body>
 <span class="c1"># ============================================================</span>
 
 <span class="n">practical_comparison_markdown</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
-<span class="s2">| Model | Released | Performance | Base Fit Speed | Prediction Speed | Tuning Cost | Memory Use | Overfit | Scaling Sensitivity | Need Scaling? | Hyperparam Sensitivity | External Library? | Can Continue Training? | Continue Training Method | Short Description |</span>
+<span class="s2">| Model | Released | Performance | Fit Speed | Prediction Speed | Memory Efficiency | Overfitting Resistance | Scaling Robustness | Need Scaling? | External Library? | Can Continue Training? | Continue Training Method | Probability Output? | Threshold Adjustable? | Short Description |</span>
 <span class="s2">|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---|</span>
-<span class="s2">| Linear Regressor                 | 2010 | 6  | 10 | 10 | 1  | 2  | 2  | 3  | Not required      | 1 | No             | No  | -                                 | Simple linear model |</span>
-<span class="s2">| Ridge Regressor                  | 2010 | 7  | 10 | 10 | 2  | 2  | 1  | 6  | Yes / recommended | 4 | No             | No  | -                                 | L2-regularized linear model |</span>
-<span class="s2">| Lasso Regressor                  | 2010 | 7  | 10 | 10 | 4  | 3  | 2  | 7  | Yes / recommended | 6 | No             | No  | -                                 | L1 regularization + feature selection |</span>
-<span class="s2">| ElasticNet Regressor             | 2010 | 8  | 10 | 10 | 4  | 3  | 2  | 8  | Yes / recommended | 8 | No             | No  | -                                 | Combination of L1 and L2 |</span>
-<span class="s2">| Bayesian Ridge Regressor         | 2010 | 7  | 10 | 10 | 2  | 3  | 1  | 6  | Yes / recommended | 4 | No             | No  | -                                 | Bayesian regularized linear model |</span>
-<span class="s2">| RANSAC Regressor                 | 2010 | 7  | 10 | 10 | 5  | 4  | 3  | 4  | Not required      | 7 | No             | No  | -                                 | Robust model against outliers |</span>
-<span class="s2">| SGD Regressor                    | 2010 | 7  | 10 | 10 | 4  | 1  | 4  | 8  | Yes               | 7 | No             | Yes | `partial_fit(X, y)`               | Gradient-based online linear model |</span>
-<span class="s2">| SVR (linear)                     | 2010 | 8  | 3  | 4  | 8  | 4  | 3  | 8  | Yes               | 6 | No             | No  | -                                 | Linear margin-based regressor |</span>
-<span class="s2">| SVR (RBF)                        | 2010 | 9  | 3  | 1  | 10 | 7  | 7  | 10 | Yes               | 9 | No             | No  | -                                 | Kernel-based nonlinear regressor |</span>
-<span class="s2">| KNeighbors Regressor             | 2010 | 7  | 10 | 8  | 4  | 8  | 10 | 9  | Yes               | 5 | No             | No  | -                                 | Distance-based model that stores the training data |</span>
-<span class="s2">| NuSVR Regressor                  | 2010 | 9  | 2  | 6  | 10 | 7  | 7  | 10 | Yes               | 9 | No             | No  | -                                 | Nu-based kernel SVR, usually strong but very slow on large datasets |</span>
-<span class="s2">| Decision Tree Regressor          | 2010 | 7  | 10 | 10 | 3  | 3  | 10 | 1  | No                | 4 | No             | No  | -                                 | Tree-based model |</span>
-<span class="s2">| Random Forest Regressor          | 2010 | 9  | 8  | 10 | 5  | 7  | 4  | 1  | No                | 5 | No             | No  | -                                 | Bagged ensemble of decision trees |</span>
-<span class="s2">| AdaBoost Regressor               | 2010 | 8  | 9  | 10 | 6  | 4  | 6  | 2  | No                | 6 | No             | No  | -                                 | Boosting regressor that corrects errors step by step |</span>
-<span class="s2">| Bagging Regressor                | 2010 | 8  | 8  | 10 | 5  | 6  | 5  | Depends | Depends      | 5 | No             | No  | -                                 | Average of multiple bootstrap-trained models |</span>
-<span class="s2">| Dummy Regressor                  | 2013 | 1  | 10 | 10 | 1  | 1  | 1  | 1  | No                | 1 | No             | No  | -                                 | Naive baseline, for example predicts the mean |</span>
-<span class="s2">| Extra Trees Regressor            | 2013 | 9  | 9  | 10 | 4  | 7  | 4  | 1  | No                | 4 | No             | No  | -                                 | Strongly randomized tree ensemble |</span>
-<span class="s2">| XGBoost Regressor                | 2014 | 10 | 10 | 10 | 6  | 7  | 8  | 2  | No                | 9 | Yes (xgboost)  | Yes | `fit(X, y, xgb_model=old_model)`  | Strong regularized boosting |</span>
-<span class="s2">| Huber Regressor                  | 2016 | 7  | 10 | 10 | 5  | 3  | 2  | 7  | Yes / recommended | 5 | No             | No  | -                                 | Robust linear regressor for outliers |</span>
-<span class="s2">| Gradient Boosting Regressor      | 2016 | 10 | 9  | 10 | 7  | 5  | 8  | 2  | No                | 8 | No             | No  | -                                 | Classic boosting model |</span>
-<span class="s2">| MLP Regressor                    | 2016 | 9  | 3  | 10 | 8  | 6  | 8  | 9  | Yes               | 9 | No             | Yes | `partial_fit(X, y)`               | Neural network for regressor |</span>
-<span class="s2">| Passive Aggressive Regressor     | 2017 | 6  | 10 | 10 | 4  | 1  | 5  | 8  | Yes               | 6 | No             | Yes | `partial_fit(X, y)`               | Online linear model with aggressive updates |</span>
-<span class="s2">| LightGBM Regressor               | 2017 | 10 | 10 | 10 | 5  | 5  | 8  | 2  | No                | 8 | Yes (lightgbm) | Yes | `fit(X, y, init_model=old_model)` | Very fast boosting for large datasets |</span>
-<span class="s2">| CatBoost Regressor               | 2017 | 10 | 10 | 10 | 6  | 6  | 7  | 2  | No                | 6 | Yes (catboost) | Yes | `fit(X, y, init_model=old_model)` | Strong boosting, also good with categorical data |</span>
-<span class="s2">| Voting Regressor                 | 2019 | 8  | 5  | 10 | 3  | 5  | 5  | Depends | Depends      | 4 | No             | No  | -                                 | Average of predictions from multiple regressors |</span>
-<span class="s2">| Stacking Regressor               | 2019 | 9  | 3  | 10 | 5  | 7  | 6  | Depends | Depends      | 8 | No             | No  | -                                 | Multi-level ensemble meta-model |</span>
-<span class="s2">| Poisson Regressor                | 2020 | 6  | 8  | 10 | 4  | 2  | 2  | 6  | Yes / recommended | 5 | No             | No  | -                                 | GLM for strictly positive count-like targets with log link |</span>
-<span class="s2">| Gamma Regressor                  | 2020 | 5  | 8  | 10 | 5  | 2  | 2  | 6  | Yes / recommended | 6 | No             | No  | -                                 | GLM for strictly positive right-skewed targets with log link |</span>
-<span class="s2">| Hist Gradient Boosting Regressor | 2020 | 10 | 10 | 10 | 5  | 5  | 7  | 2  | No                | 7 | No             | No  | -                                 | Fast boosting for larger datasets |</span>
-<span class="s2">| Quantile Regressor               | 2021 | 7  | 8  | 10 | 6  | 3  | 2  | 7  | Yes / recommended | 7 | No             | No  | -                                 | Linear model that predicts conditional quantiles, robust to outliers |</span>
+<span class="s2">| Logistic Regression L2            | 2010 | 7  | 10 | 10 | 9  | 9  | 4  | Yes / recommended | No             | No  | -                                      | Yes | Yes | Regularized linear classifier |</span>
+<span class="s2">| Logistic Regression L1            | 2010 | 7  | 9  | 10 | 9  | 9  | 3  | Yes / recommended | No             | No  | -                                      | Yes | Yes | Sparse logistic model with feature selection |</span>
+<span class="s2">| Logistic Regression ElasticNet    | 2010 | 8  | 8  | 10 | 8  | 9  | 3  | Yes / recommended | No             | No  | -                                      | Yes | Yes | Combines L1 and L2 regularization |</span>
+<span class="s2">| Ridge Classifier                  | 2010 | 7  | 10 | 10 | 9  | 10 | 4  | Yes / recommended | No             | No  | -                                      | No  | Yes | L2-regularized linear classifier |</span>
+<span class="s2">| SGD Classifier                    | 2010 | 7  | 10 | 10 | 10 | 7  | 2  | Yes               | No             | Yes | `partial_fit(X, y)`                    | Depends on loss | Yes | Online linear classifier trained with SGD |</span>
+<span class="s2">| Linear SVC                        | 2010 | 8  | 9  | 10 | 8  | 8  | 3  | Yes               | No             | No  | -                                      | No  | Yes | Fast linear support vector classifier |</span>
+<span class="s2">| SVC (linear)                      | 2010 | 8  | 3  | 4  | 6  | 8  | 3  | Yes               | No             | No  | -                                      | Optional | Yes | Kernel SVC with linear decision boundary |</span>
+<span class="s2">| SVC (RBF)                         | 2010 | 9  | 2  | 2  | 3  | 3  | 1  | Yes               | No             | No  | -                                      | Optional | Yes | Nonlinear kernel support vector classifier |</span>
+<span class="s2">| KNeighbors Classifier             | 2010 | 7  | 10 | 5  | 3  | 3  | 1  | Yes               | No             | No  | -                                      | Yes | Yes | Distance-based classifier |</span>
+<span class="s2">| Nearest Centroid Classifier       | 2010 | 5  | 10 | 10 | 10 | 10 | 3  | Yes / recommended | No             | No  | -                                      | No  | No  | Simple centroid-based classifier |</span>
+<span class="s2">| Gaussian NB                       | 2010 | 5  | 10 | 10 | 10 | 10 | 6  | Usually helpful   | No             | Yes | `partial_fit(X, y)`                    | Yes | Yes | Probabilistic Naive Bayes for Gaussian features |</span>
+<span class="s2">| Bernoulli NB                      | 2010 | 5  | 10 | 10 | 10 | 10 | 7  | Depends           | No             | Yes | `partial_fit(X, y)`                    | Yes | Yes | Naive Bayes for binary features |</span>
+<span class="s2">| Linear Discriminant Analysis      | 2010 | 7  | 10 | 10 | 8  | 9  | 5  | Yes / recommended | No             | No  | -                                      | Yes | Yes | Linear discriminant classifier |</span>
+<span class="s2">| Quadratic Discriminant Analysis   | 2010 | 7  | 9  | 10 | 7  | 5  | 5  | Yes / recommended | No             | No  | -                                      | Yes | Yes | Quadratic discriminant classifier |</span>
+<span class="s2">| Decision Tree Classifier          | 2010 | 7  | 10 | 10 | 8  | 1  | 10 | No                | No             | No  | -                                      | Yes | Yes | Single tree-based classifier |</span>
+<span class="s2">| Extra Tree Classifier             | 2010 | 6  | 10 | 10 | 8  | 1  | 10 | No                | No             | No  | -                                      | Yes | Yes | Highly randomized single decision tree |</span>
+<span class="s2">| Random Forest Classifier          | 2010 | 9  | 8  | 9  | 4  | 7  | 10 | No                | No             | Yes | `warm_start=True`                     | Yes | Yes | Bagged ensemble of decision trees |</span>
+<span class="s2">| AdaBoost Classifier               | 2010 | 7  | 9  | 10 | 7  | 5  | 9  | No                | No             | No  | -                                      | Yes | Yes | Sequential boosting classifier |</span>
+<span class="s2">| Bagging Classifier                | 2010 | 8  | 7  | 8  | 5  | 6  | 8  | Depends           | No             | No  | -                                      | Depends on base estimator | Depends | Ensemble of bootstrap-trained models |</span>
+<span class="s2">| Dummy Classifier                  | 2013 | 1  | 10 | 10 | 10 | 10 | 10 | No                | No             | No  | -                                      | Yes | Yes (limited) | Naive baseline model |</span>
+<span class="s2">| Extra Trees Classifier            | 2013 | 9  | 9  | 9  | 4  | 7  | 10 | No                | No             | Yes | `warm_start=True`                     | Yes | Yes | Strongly randomized tree ensemble |</span>
+<span class="s2">| XGBoost Classifier                | 2014 | 10 | 10 | 10 | 4  | 3  | 9  | No                | Yes (xgboost)  | Yes | `fit(X, y, xgb_model=old_model)`      | Yes | Yes | Powerful regularized boosting classifier |</span>
+<span class="s2">| Gradient Boosting Classifier      | 2016 | 9  | 6  | 9  | 6  | 3  | 9  | No                | No             | Yes | `warm_start=True`                     | Yes | Yes | Classic gradient boosting classifier |</span>
+<span class="s2">| MLP Classifier                    | 2016 | 8  | 3  | 10 | 5  | 3  | 1  | Yes               | No             | Yes | `partial_fit(X, y)`                    | Yes | Yes | Neural network classifier |</span>
+<span class="s2">| Passive Aggressive Classifier     | 2017 | 6  | 10 | 10 | 10 | 6  | 2  | Yes               | No             | Yes | `partial_fit(X, y)`                    | No  | Yes | Online margin-based classifier |</span>
+<span class="s2">| LightGBM Classifier               | 2017 | 10 | 10 | 10 | 6  | 3  | 9  | No                | Yes (lightgbm) | Yes | `fit(X, y, init_model=old_model)`     | Yes | Yes | Very fast boosting classifier |</span>
+<span class="s2">| CatBoost Classifier               | 2017 | 10 | 9  | 10 | 5  | 4  | 9  | No / native cat support | Yes (catboost) | Yes | `fit(X, y, init_model=old_model)` | Yes | Yes | Strong boosting model, good with categorical data |</span>
+<span class="s2">| Voting Classifier                 | 2019 | 8  | 5  | 8  | 5  | 6  | 5  | Depends           | No             | No  | -                                      | Yes | Yes | Soft voting ensemble of six strong tuned models |</span>
+<span class="s2">| Stacking Classifier               | 2019 | 9  | 3  | 8  | 3  | 5  | 5  | Depends           | No             | No  | -                                      | Yes | Yes | Multi-level ensemble using six strong tuned models plus MLP |</span>
+<span class="s2">| Hist Gradient Boosting Classifier | 2020 | 9  | 10 | 10 | 6  | 4  | 9  | No                | No             | Yes | `warm_start=True`                     | Yes | Yes | Fast histogram-based boosting classifier |</span>
 <span class="s2">"""</span>
 
 <span class="c1"># Display the table as Markdown</span>
@@ -50028,14 +50089,12 @@ forceTheme('sk-container-id-3');</script></body>
 <th style="text-align:left">Model</th>
 <th style="text-align:center">Released</th>
 <th style="text-align:center">Performance</th>
-<th style="text-align:center">Base Fit Speed</th>
+<th style="text-align:center">Fit Speed</th>
 <th style="text-align:center">Prediction Speed</th>
-<th style="text-align:center">Tuning Cost</th>
-<th style="text-align:center">Memory Use</th>
-<th style="text-align:center">Overfit</th>
-<th style="text-align:center">Scaling Sensitivity</th>
+<th style="text-align:center">Memory Efficiency</th>
+<th style="text-align:center">Overfitting Resistance</th>
+<th style="text-align:center">Scaling Robustness</th>
 <th style="text-align:center">Need Scaling?</th>
-<th style="text-align:center">Hyperparam Sensitivity</th>
 <th style="text-align:center">External Library?</th>
 <th style="text-align:center">Can Continue Training?</th>
 <th style="text-align:center">Continue Training Method</th>
@@ -50046,15 +50105,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Linear Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
 <td style="text-align:center">3</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">8</td>
 <td style="text-align:center">Not required</td>
-<td style="text-align:center">1</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50063,15 +50120,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Ridge Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">10</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">6</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50080,15 +50135,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Lasso Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">Yes / recommended</td>
 <td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Yes / recommended</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50097,15 +50150,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">ElasticNet Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">8</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50114,15 +50165,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Bayesian Ridge Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">2</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50131,15 +50180,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">RANSAC Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">Not required</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">Not required</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50148,15 +50195,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">SGD Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">8</td>
-<td style="text-align:center">Yes</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">7</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>partial_fit(X, y)</code></td>
@@ -50165,15 +50210,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">SVR (linear)</td>
 <td style="text-align:center">2010</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">7</td>
 <td style="text-align:center">8</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">8</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50182,15 +50225,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">SVR (RBF)</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">3</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">2</td>
 <td style="text-align:center">1</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50199,15 +50240,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">KNeighbors Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
 <td style="text-align:center">9</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50216,15 +50255,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">NuSVR Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">2</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50234,14 +50271,12 @@ forceTheme('sk-container-id-3');</script></body>
 <td style="text-align:left">Decision Tree Regressor</td>
 <td style="text-align:center">2010</td>
 <td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
 <td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50250,15 +50285,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Random Forest Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">9</td>
 <td style="text-align:center">8</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">7</td>
 <td style="text-align:center">4</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50267,15 +50300,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">AdaBoost Regressor</td>
 <td style="text-align:center">2010</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">4</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50285,14 +50316,12 @@ forceTheme('sk-container-id-3');</script></body>
 <td style="text-align:left">Bagging Regressor</td>
 <td style="text-align:center">2010</td>
 <td style="text-align:center">8</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">5</td>
 <td style="text-align:center">6</td>
-<td style="text-align:center">5</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">Depends</td>
-<td style="text-align:center">Depends</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50304,12 +50333,10 @@ forceTheme('sk-container-id-3');</script></body>
 <td style="text-align:center">1</td>
 <td style="text-align:center">10</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">1</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50319,14 +50346,12 @@ forceTheme('sk-container-id-3');</script></body>
 <td style="text-align:left">Extra Trees Regressor</td>
 <td style="text-align:center">2013</td>
 <td style="text-align:center">9</td>
-<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
 <td style="text-align:center">10</td>
 <td style="text-align:center">4</td>
 <td style="text-align:center">7</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">4</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50335,15 +50360,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">XGBoost Regressor</td>
 <td style="text-align:center">2014</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">7</td>
 <td style="text-align:center">8</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">No</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
 <td style="text-align:center">Yes (xgboost)</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>fit(X, y, xgb_model=old_model)</code></td>
@@ -50352,15 +50375,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Huber Regressor</td>
 <td style="text-align:center">2016</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">3</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">7</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50369,15 +50390,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Gradient Boosting Regressor</td>
 <td style="text-align:center">2016</td>
-<td style="text-align:center">10</td>
 <td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">7</td>
+<td style="text-align:center">6</td>
 <td style="text-align:center">5</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">8</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50387,14 +50406,12 @@ forceTheme('sk-container-id-3');</script></body>
 <td style="text-align:left">MLP Regressor</td>
 <td style="text-align:center">2016</td>
 <td style="text-align:center">9</td>
-<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">9</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">2</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>partial_fit(X, y)</code></td>
@@ -50403,15 +50420,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Passive Aggressive Regressor</td>
 <td style="text-align:center">2017</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">6</td>
 <td style="text-align:center">10</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">8</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">3</td>
 <td style="text-align:center">Yes</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>partial_fit(X, y)</code></td>
@@ -50420,15 +50435,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">LightGBM Regressor</td>
 <td style="text-align:center">2017</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">5</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">8</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">8</td>
 <td style="text-align:center">Yes (lightgbm)</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>fit(X, y, init_model=old_model)</code></td>
@@ -50437,15 +50450,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">CatBoost Regressor</td>
 <td style="text-align:center">2017</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">6</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">Yes (catboost)</td>
 <td style="text-align:center">Yes</td>
 <td style="text-align:center"><code>fit(X, y, init_model=old_model)</code></td>
@@ -50454,15 +50465,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Voting Regressor</td>
 <td style="text-align:center">2019</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">5</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">Depends</td>
-<td style="text-align:center">Depends</td>
 <td style="text-align:center">4</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Depends</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50471,15 +50480,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Stacking Regressor</td>
 <td style="text-align:center">2019</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">3</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">Depends</td>
-<td style="text-align:center">Depends</td>
+<td style="text-align:center">2</td>
 <td style="text-align:center">8</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Depends</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50488,15 +50495,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Poisson Regressor</td>
 <td style="text-align:center">2020</td>
-<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
 <td style="text-align:center">8</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">5</td>
+<td style="text-align:center">Yes / recommended</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50505,15 +50510,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Gamma Regressor</td>
 <td style="text-align:center">2020</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">8</td>
+<td style="text-align:center">1</td>
 <td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">5</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">6</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50522,15 +50525,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Hist Gradient Boosting Regressor</td>
 <td style="text-align:center">2020</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">8</td>
 <td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">2</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">9</td>
 <td style="text-align:center">No</td>
-<td style="text-align:center">7</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50539,15 +50540,13 @@ forceTheme('sk-container-id-3');</script></body>
 <tr>
 <td style="text-align:left">Quantile Regressor</td>
 <td style="text-align:center">2021</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">10</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">3</td>
 <td style="text-align:center">2</td>
-<td style="text-align:center">7</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
 <td style="text-align:center">Yes / recommended</td>
-<td style="text-align:center">7</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">No</td>
 <td style="text-align:center">-</td>
@@ -50574,6 +50573,550 @@ forceTheme('sk-container-id-3');</script></body>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>This table is a practical, experience-based summary of the model families tested in this project. It is intended to support interpretation and model selection, but it should not be treated as a formal statistical ranking.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Model</th>
+<th style="text-align:center">Released</th>
+<th style="text-align:center">Performance</th>
+<th style="text-align:center">Fit Speed</th>
+<th style="text-align:center">Prediction Speed</th>
+<th style="text-align:center">Memory Efficiency</th>
+<th style="text-align:center">Overfitting Resistance</th>
+<th style="text-align:center">Scaling Robustness</th>
+<th style="text-align:center">Need Scaling?</th>
+<th style="text-align:center">External Library?</th>
+<th style="text-align:center">Can Continue Training?</th>
+<th style="text-align:center">Continue Training Method</th>
+<th style="text-align:center">Probability Output?</th>
+<th style="text-align:center">Threshold Adjustable?</th>
+<th style="text-align:left">Short Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Logistic Regression L2</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Regularized linear classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Logistic Regression L1</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Sparse logistic model with feature selection</td>
+</tr>
+<tr>
+<td style="text-align:left">Logistic Regression ElasticNet</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Combines L1 and L2 regularization</td>
+</tr>
+<tr>
+<td style="text-align:left">Ridge Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">L2-regularized linear classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">SGD Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>partial_fit(X, y)</code></td>
+<td style="text-align:center">Depends on loss</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Online linear classifier trained with SGD</td>
+</tr>
+<tr>
+<td style="text-align:left">Linear SVC</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Fast linear support vector classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">SVC (linear)</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Optional</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Kernel SVC with linear decision boundary</td>
+</tr>
+<tr>
+<td style="text-align:left">SVC (RBF)</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Optional</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Nonlinear kernel support vector classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">KNeighbors Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Distance-based classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Nearest Centroid Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:left">Simple centroid-based classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Gaussian NB</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">Usually helpful</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>partial_fit(X, y)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Probabilistic Naive Bayes for Gaussian features</td>
+</tr>
+<tr>
+<td style="text-align:left">Bernoulli NB</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">Depends</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>partial_fit(X, y)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Naive Bayes for binary features</td>
+</tr>
+<tr>
+<td style="text-align:left">Linear Discriminant Analysis</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Linear discriminant classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Quadratic Discriminant Analysis</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Yes / recommended</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Quadratic discriminant classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Decision Tree Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Single tree-based classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Extra Tree Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Highly randomized single decision tree</td>
+</tr>
+<tr>
+<td style="text-align:left">Random Forest Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>warm_start=True</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Bagged ensemble of decision trees</td>
+</tr>
+<tr>
+<td style="text-align:left">AdaBoost Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Sequential boosting classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Bagging Classifier</td>
+<td style="text-align:center">2010</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">Depends</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Depends on base estimator</td>
+<td style="text-align:center">Depends</td>
+<td style="text-align:left">Ensemble of bootstrap-trained models</td>
+</tr>
+<tr>
+<td style="text-align:left">Dummy Classifier</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes (limited)</td>
+<td style="text-align:left">Naive baseline model</td>
+</tr>
+<tr>
+<td style="text-align:left">Extra Trees Classifier</td>
+<td style="text-align:center">2013</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>warm_start=True</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Strongly randomized tree ensemble</td>
+</tr>
+<tr>
+<td style="text-align:left">XGBoost Classifier</td>
+<td style="text-align:center">2014</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes (xgboost)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>fit(X, y, xgb_model=old_model)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Powerful regularized boosting classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Gradient Boosting Classifier</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>warm_start=True</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Classic gradient boosting classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">MLP Classifier</td>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>partial_fit(X, y)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Neural network classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">Passive Aggressive Classifier</td>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>partial_fit(X, y)</code></td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Online margin-based classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">LightGBM Classifier</td>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes (lightgbm)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>fit(X, y, init_model=old_model)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Very fast boosting classifier</td>
+</tr>
+<tr>
+<td style="text-align:left">CatBoost Classifier</td>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No / native cat support</td>
+<td style="text-align:center">Yes (catboost)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>fit(X, y, init_model=old_model)</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Strong boosting model, good with categorical data</td>
+</tr>
+<tr>
+<td style="text-align:left">Voting Classifier</td>
+<td style="text-align:center">2019</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Depends</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Soft voting ensemble of six strong tuned models</td>
+</tr>
+<tr>
+<td style="text-align:left">Stacking Classifier</td>
+<td style="text-align:center">2019</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">Depends</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Multi-level ensemble using six strong tuned models plus MLP</td>
+</tr>
+<tr>
+<td style="text-align:left">Hist Gradient Boosting Classifier</td>
+<td style="text-align:center">2020</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">No</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center"><code>warm_start=True</code></td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:left">Fast histogram-based boosting classifier</td>
+</tr>
+</tbody>
+</table>
+<p>"""</p>
 </div>
 </div>
 </div>
