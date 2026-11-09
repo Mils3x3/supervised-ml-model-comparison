@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>My_ML_Supervised_Regression-30_Model_Comparison</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>1My_ML_Supervised_Regression-30_Model_Comparison</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7804,7 +7804,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Supervised-Regression:-30-Model-Comparison">Supervised Regression: 30-Model Comparison<a class="anchor-link" href="#Supervised-Regression:-30-Model-Comparison">¶</a></h1>
+<h1 id="top-of-the-page" style="color:#8B1E1E;"><strong>Supervised Regression: 30-Model Comparison</strong></h1>
 </div>
 </div>
 </div>
@@ -7815,7 +7815,141 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Executive-Summary">Executive Summary<a class="anchor-link" href="#Executive-Summary">¶</a></h2><p>This notebook presents a supervised machine learning regression project using the <code>diamonds</code> dataset. The main objective is to compare 30 regression models under a consistent preprocessing, training, tuning, and evaluation framework.</p>
+<h2 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">¶</a></h2><p><span style="color:#6C757D;">Select a topic to jump directly to it. Each section contains a link to return to this table of contents.</span></p>
+<div style="border-left:5px solid #405A77; background-color:#f2f4f7; padding:9px 14px; margin:18px 0 9px 0; font-family:Calibri, Arial, sans-serif;">
+<strong style="color:#405A77; font-size:17px;">01 · Project Overview</strong><br/>
+<span style="color:#606a74; font-size:13px;">Research goals, methods, metrics and reproducibility</span>
+</div>
+<strong><a href="#executive-summary" style="text-decoration:none;">Executive Summary</a></strong><br/>
+<strong><a href="#research-question" style="text-decoration:none;">Research Question</a></strong><br/>
+<strong><a href="#project-scope" style="text-decoration:none;">Project Scope</a></strong><br/>
+<strong><a href="#dataset-and-target-definition" style="text-decoration:none;">Dataset and Target Definition</a></strong><br/>
+<strong><a href="#experimental-design" style="text-decoration:none;">Experimental Design</a></strong><br/>
+<strong><a href="#evaluation-metrics" style="text-decoration:none;">Evaluation Metrics</a></strong><br/>
+<strong><a href="#model-families-compared" style="text-decoration:none;">Model Families Compared</a></strong><br/>
+<strong><a href="#reproducibility-note" style="text-decoration:none;">Reproducibility Note</a></strong><br/>
+<strong><a href="#portfolio-export-paths" style="text-decoration:none;">Portfolio Export Paths</a></strong><br/>
+<strong><a href="#switches" style="text-decoration:none;">Switches</a></strong><br/>
+<strong><a href="#shared-configuration-for-model-evaluation-and-tuning" style="text-decoration:none;">Shared Configuration for Model Evaluation and Tuning</a></strong><br/>
+<div style="border-left:5px solid #477568; background-color:#f2f4f7; padding:9px 14px; margin:18px 0 9px 0; font-family:Calibri, Arial, sans-serif;">
+<strong style="color:#477568; font-size:17px;">02 · Data Preparation</strong><br/>
+<span style="color:#606a74; font-size:13px;">Dataset inspection, features and preprocessing</span>
+</div>
+<strong><a href="#load-the-dataset" style="text-decoration:none;">Load the Dataset</a></strong><br/>
+<strong><a href="#check-the-dataset" style="text-decoration:none;">Check the Dataset</a></strong><br/>
+<strong><a href="#target-definition" style="text-decoration:none;">Target Definition</a></strong><br/>
+<strong><a href="#train-and-test-set" style="text-decoration:none;">Train and Test Set</a></strong><br/>
+<strong><a href="#feature-engineering" style="text-decoration:none;">Feature Engineering</a></strong><br/>
+<strong><a href="#preprocessing" style="text-decoration:none;">Preprocessing</a></strong><br/>
+<strong><a href="#evaluation-functions" style="text-decoration:none;">Evaluation Functions</a></strong><br/>
+<strong><a href="#load-the-saved-files" style="text-decoration:none;">Load the saved files</a></strong><br/>
+<div style="border-left:5px solid #8B1E1E; background-color:#f2f4f7; padding:9px 14px; margin:18px 0 9px 0; font-family:Calibri, Arial, sans-serif;">
+<strong style="color:#8B1E1E; font-size:17px;">03 · Regression Models</strong><br/>
+<span style="color:#606a74; font-size:13px;">30 models grouped by family, with nested hyperparameter tuning</span>
+</div>
+<strong style="color:#555555;"><a href="#baseline-models" style="text-decoration:none;">Baseline models</a></strong><br/>
+    <a href="#dummy-regressor" style="text-decoration:none;">Dummy Regressor</a><br/>
+<strong style="color:#555555;"><a href="#linear-regularized-models" style="text-decoration:none;">Linear / regularized models</a></strong><br/>
+    <a href="#linear-regressor" style="text-decoration:none;">Linear Regressor</a><br/>
+    <a href="#ridge-regressor" style="text-decoration:none;">Ridge Regressor</a><br/>
+        <a href="#ridge-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#lasso-regressor" style="text-decoration:none;">Lasso Regressor</a><br/>
+        <a href="#lasso-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#elasticnet-regressor" style="text-decoration:none;">ElasticNet Regressor</a><br/>
+        <a href="#elasticnet-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#bayesian-ridge-regressor" style="text-decoration:none;">Bayesian Ridge Regressor</a><br/>
+        <a href="#bayesian-ridge-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#quantile-regressor" style="text-decoration:none;">Quantile Regressor</a><br/>
+        <a href="#quantile-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#robust-linear-models" style="text-decoration:none;">Robust linear models</a></strong><br/>
+    <a href="#huber-regressor" style="text-decoration:none;">Huber Regressor</a><br/>
+        <a href="#huber-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#ransac-regressor" style="text-decoration:none;">RANSAC Regressor</a><br/>
+        <a href="#ransac-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#online-linear-models" style="text-decoration:none;">Online linear models</a></strong><br/>
+    <a href="#sgd-regressor-stochastic-gradient-descent" style="text-decoration:none;">SGD Regressor (Stochastic Gradient Descent)</a><br/>
+        <a href="#sgd-regressor-stochastic-gradient-descent-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#passive-aggressive-regressor" style="text-decoration:none;">Passive Aggressive Regressor</a><br/>
+        <a href="#passive-aggressive-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#glm-distribution-based-linear-models" style="text-decoration:none;">GLM / distribution-based linear models</a></strong><br/>
+    <a href="#poisson-regressor" style="text-decoration:none;">Poisson Regressor</a><br/>
+        <a href="#poisson-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#gamma-regressor" style="text-decoration:none;">Gamma Regressor</a><br/>
+        <a href="#gamma-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#kernel-distance-based-models" style="text-decoration:none;">Kernel / Distance-based models</a></strong><br/>
+    <a href="#svr-support-vector-regression-linear" style="text-decoration:none;">SVR - Support Vector Regression (linear)</a><br/>
+        <a href="#svr-support-vector-regression-linear-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#svr-support-vector-regression-rbf" style="text-decoration:none;">SVR - Support Vector Regression (RBF)</a><br/>
+        <a href="#svr-support-vector-regression-rbf-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#kneighbors-regressor" style="text-decoration:none;">KNeighbors Regressor</a><br/>
+        <a href="#kneighbors-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#nusvr-regressor" style="text-decoration:none;">NuSVR Regressor</a><br/>
+        <a href="#nusvr-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#tree-based-models" style="text-decoration:none;">Tree-based models</a></strong><br/>
+    <a href="#decision-tree-regressor" style="text-decoration:none;">Decision Tree Regressor</a><br/>
+        <a href="#decision-tree-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#tree-based-ensemble-models" style="text-decoration:none;">Tree-based ensemble models</a></strong><br/>
+    <a href="#random-forest-regressor" style="text-decoration:none;">Random Forest Regressor</a><br/>
+        <a href="#random-forest-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#extra-trees-regressor" style="text-decoration:none;">Extra Trees Regressor</a><br/>
+        <a href="#extra-trees-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#boosting-ensemble-models" style="text-decoration:none;">Boosting ensemble models</a></strong><br/>
+    <a href="#adaboost-regressor" style="text-decoration:none;">AdaBoost Regressor</a><br/>
+        <a href="#adaboost-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#gradient-boosting-regressor" style="text-decoration:none;">Gradient Boosting Regressor</a><br/>
+        <a href="#gradient-boosting-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#hist-gradient-boosting-regressor" style="text-decoration:none;">Hist Gradient Boosting Regressor</a><br/>
+        <a href="#hist-gradient-boosting-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#xgboost-regressor" style="text-decoration:none;">XGBoost Regressor</a><br/>
+        <a href="#xgboost-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#lightgbm-regressor" style="text-decoration:none;">LightGBM Regressor</a><br/>
+        <a href="#lightgbm-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#catboost-regressor" style="text-decoration:none;">CatBoost Regressor</a><br/>
+        <a href="#catboost-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#neural-models" style="text-decoration:none;">Neural models</a></strong><br/>
+    <a href="#mlp-regressor" style="text-decoration:none;">MLP Regressor</a><br/>
+        <a href="#mlp-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+<strong style="color:#555555;"><a href="#advanced-ensemble-models" style="text-decoration:none;">Advanced ensemble models</a></strong><br/>
+    <a href="#bagging-regressor" style="text-decoration:none;">Bagging Regressor</a><br/>
+        <a href="#bagging-regressor-hyperparameter-tuning" style="text-decoration:none; color:#167C80;">Hyperparameter Tuning</a><br/>
+    <a href="#voting-regressor" style="text-decoration:none;">Voting Regressor</a><br/>
+    <a href="#stacking-regressor" style="text-decoration:none;">Stacking Regressor</a><br/>
+<div style="border-left:5px solid #245B91; background-color:#f2f4f7; padding:9px 14px; margin:18px 0 9px 0; font-family:Calibri, Arial, sans-serif;">
+<strong style="color:#245B91; font-size:17px;">04 · Results &amp; Conclusions</strong><br/>
+<span style="color:#606a74; font-size:13px;">Comparisons, diagnostics, exports and final conclusions</span>
+</div>
+<strong><a href="#tuned-regression-model-comparison" style="text-decoration:none;">Tuned Regression Model Comparison</a></strong><br/>
+<strong><a href="#prediction-comparison-on-selected-test-samples" style="text-decoration:none;">Prediction Comparison on Selected Test Samples</a></strong><br/>
+<strong><a href="#prediction-range-and-difference-summary" style="text-decoration:none;">Prediction range and difference summary</a></strong><br/>
+<strong><a href="#best-model-performance-by-price-range" style="text-decoration:none;">Best Model Performance by Price Range</a></strong><br/>
+<strong><a href="#high-value-prediction-performance" style="text-decoration:none;">High-Value Prediction Performance</a></strong><br/>
+<strong><a href="#actual-vs-predicted-price-distributions-by-model-group" style="text-decoration:none;">Actual vs Predicted Price Distributions by Model Group</a></strong><br/>
+<strong><a href="#prediction-error-analysis" style="text-decoration:none;">Prediction Error Analysis</a></strong><br/>
+<strong><a href="#best-params-summary" style="text-decoration:none;">best_params summary</a></strong><br/>
+<strong><a href="#permutation-importance-for-the-best-regression-model" style="text-decoration:none;">Permutation Importance for the Best Regression Model</a></strong><br/>
+<strong><a href="#log-target-mini-experiment" style="text-decoration:none;">Log-Target Mini Experiment</a></strong><br/>
+<strong><a href="#saving-and-loading-the-models" style="text-decoration:none;">Saving and Loading the Models</a></strong><br/>
+<strong><a href="#saving-and-loading-the-search-objects" style="text-decoration:none;">Saving and Loading the Search Objects</a></strong><br/>
+<strong><a href="#saving-and-loading-the-base-models" style="text-decoration:none;">Saving and Loading the Base Models</a></strong><br/>
+<strong><a href="#saving-and-loading-a-list-of-predictions" style="text-decoration:none;">Saving and Loading a list of Predictions</a></strong><br/>
+<strong><a href="#practical-heuristic-comparison-of-regressor-models" style="text-decoration:none;">Practical Heuristic Comparison of Regressor Models</a></strong><br/>
+<strong><a href="#practical-model-selection-performance-runtime-and-file-size" style="text-decoration:none;">Practical Model Selection: Performance, Runtime and File Size</a></strong><br/>
+<strong><a href="#final-model-comparison" style="text-decoration:none;">Final Model Comparison</a></strong><br/>
+<strong><a href="#limitations-and-future-work" style="text-decoration:none;">Limitations and Future Work</a></strong><br/>
+<strong><a href="#conclusion" style="text-decoration:none;">Conclusion</a></strong><br/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="executive-summary" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Executive Summary</h2>
+This notebook presents a supervised machine learning regression project using the `diamonds` dataset. The main objective is to compare 30 regression models under a consistent preprocessing, training, tuning, and evaluation framework.
+
 <p>The target variable is <code>price</code>, and the goal is to predict diamond prices from the available numerical and categorical features, such as carat, cut, colour, clarity, depth, table, and physical dimensions.</p>
 <p>The project compares a wide range of model families, including baseline models, linear and regularized regressors, robust regressors, distance-based models, support vector models, tree-based models, ensemble models, boosting models, neural network models, and meta-estimators such as Voting and Stacking regressors.</p>
 <p>The models are evaluated using multiple regression metrics, including MAE, MSE, RMSE, and R². Training time and prediction time are also recorded in order to compare not only predictive performance, but also computational cost and practical usability.</p>
@@ -7851,7 +7985,33 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Research-Question">Research Question<a class="anchor-link" href="#Research-Question">¶</a></h2><p>How do different supervised regression model families compare on structured tabular data when they are trained, tuned, and evaluated under a consistent experimental framework?</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="research-question" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Research Question</h2>
+How do different supervised regression model families compare on structured tabular data when they are trained, tuned, and evaluated under a consistent experimental framework?
+
 <p>More specifically, this project investigates how baseline, linear, regularized, robust, distance-based, support vector, tree-based, ensemble, boosting, neural network, and meta-estimator regression models perform when predicting diamond prices from the available numerical and categorical features.</p>
 <p>The comparison focuses not only on predictive accuracy, but also on overfitting behaviour, training time, prediction time, tuning sensitivity, and practical usability.</p>
 <p>The main questions explored in this notebook are:</p>
@@ -7872,7 +8032,33 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Project-Scope">Project Scope<a class="anchor-link" href="#Project-Scope">¶</a></h2><p>This project focuses on supervised regression using structured tabular data. The dataset used in this notebook is the <code>diamonds</code> dataset, and the target variable is <code>price</code>.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="project-scope" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Project Scope</h2>
+This project focuses on supervised regression using structured tabular data. The dataset used in this notebook is the `diamonds` dataset, and the target variable is `price`.
+
 <p>The main purpose of the project is to compare a broad selection of regression model families under a consistent machine learning workflow. The comparison includes preprocessing, model training, prediction, evaluation, hyperparameter tuning, runtime measurement, and practical model comparison.</p>
 <p>The project is intentionally broad rather than narrowly optimized for a single model. Instead of focusing only on achieving the lowest possible RMSE, the notebook explores how different types of regression models behave under similar conditions.</p>
 <p>The scope of this notebook includes:</p>
@@ -7898,7 +8084,33 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Dataset-and-Target-Definition">Dataset and Target Definition<a class="anchor-link" href="#Dataset-and-Target-Definition">¶</a></h2><p>This project uses the <code>diamonds</code> dataset, which contains information about diamonds and their physical, categorical, and price-related characteristics.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="dataset-and-target-definition" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Dataset and Target Definition</h2>
+This project uses the `diamonds` dataset, which contains information about diamonds and their physical, categorical, and price-related characteristics.
+
 <p>The regression target variable is:</p>
 <ul>
 <li><code>price</code>: the price of the diamond in US dollars.</li>
@@ -7926,7 +8138,33 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Experimental-Design">Experimental Design<a class="anchor-link" href="#Experimental-Design">¶</a></h2><p>This notebook follows a consistent supervised machine learning workflow in order to compare multiple regression models as fairly as possible.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="experimental-design" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Experimental Design</h2>
+This notebook follows a consistent supervised machine learning workflow in order to compare multiple regression models as fairly as possible.
+
 <p>The dataset is first loaded, inspected, and prepared for modelling. The target variable is <code>price</code>, while the remaining numerical and categorical columns are used as input features. The data is split into training and test sets using a fixed random state to make the results reproducible.</p>
 <p>A preprocessing pipeline is applied to handle numerical and categorical features appropriately. Numerical features are scaled where required, while categorical features are encoded so that they can be used by machine learning models. Tree-based models are also evaluated using a suitable preprocessing strategy that avoids unnecessary scaling where it is not required.</p>
 <p>Each model is first trained as a base model using a consistent evaluation function. The base models are compared using regression metrics such as MAE, MSE, RMSE, and R². Training time and prediction time are also measured.</p>
@@ -7955,20 +8193,46 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Evaluation-Metrics">Evaluation Metrics<a class="anchor-link" href="#Evaluation-Metrics">¶</a></h2><p>The regression models in this notebook are evaluated using several complementary metrics. Using multiple metrics provides a more complete picture of model performance than relying on a single score.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="evaluation-metrics" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Evaluation Metrics</h2>
+The regression models in this notebook are evaluated using several complementary metrics. Using multiple metrics provides a more complete picture of model performance than relying on a single score.
+
 <p>The main evaluation metrics are:</p>
 <ul>
-<li><p><strong>MAE — Mean Absolute Error</strong><br/>
-Measures the average absolute difference between the actual and predicted diamond prices. It is easy to interpret because it is expressed in the same unit as the target variable.</p>
+<li><p><strong>MAE — Mean Absolute Error</strong><br>
+Measures the average absolute difference between the actual and predicted diamond prices. It is easy to interpret because it is expressed in the same unit as the target variable.</br></p>
 </li>
-<li><p><strong>MSE — Mean Squared Error</strong><br/>
-Measures the average squared prediction error. Larger errors are penalised more heavily than smaller errors.</p>
+<li><p><strong>MSE — Mean Squared Error</strong><br>
+Measures the average squared prediction error. Larger errors are penalised more heavily than smaller errors.</br></p>
 </li>
-<li><p><strong>RMSE — Root Mean Squared Error</strong><br/>
-Measures the square root of the mean squared error. Like MAE, it is expressed in the same unit as the target variable, but it gives more weight to larger errors. RMSE is used as one of the main comparison metrics in this project.</p>
+<li><p><strong>RMSE — Root Mean Squared Error</strong><br>
+Measures the square root of the mean squared error. Like MAE, it is expressed in the same unit as the target variable, but it gives more weight to larger errors. RMSE is used as one of the main comparison metrics in this project.</br></p>
 </li>
-<li><p><strong>R² — Coefficient of Determination</strong><br/>
-Measures how much of the variance in the target variable is explained by the model. A higher R² value indicates that the model explains more of the variation in diamond prices.</p>
+<li><p><strong>R² — Coefficient of Determination</strong><br>
+Measures how much of the variance in the target variable is explained by the model. A higher R² value indicates that the model explains more of the variation in diamond prices.</br></p>
 </li>
 </ul>
 <p>In this project, <strong>RMSE</strong> and <strong>R²</strong> are treated as the most important summary metrics. RMSE is useful because it shows the typical prediction error in price units, while R² shows how well the model explains the overall variation in the target variable.</p>
@@ -7983,7 +8247,33 @@ Measures how much of the variance in the target variable is explained by the mod
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Model-Families-Compared">Model Families Compared<a class="anchor-link" href="#Model-Families-Compared">¶</a></h2><p>This project compares a broad range of supervised regression model families. The aim is not only to identify the best individual model, but also to understand how different types of regression approaches behave on the same structured tabular dataset.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="model-families-compared" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Model Families Compared</h2>
+This project compares a broad range of supervised regression model families. The aim is not only to identify the best individual model, but also to understand how different types of regression approaches behave on the same structured tabular dataset.
+
 <p>The models are grouped into the following broad families:</p>
 <table>
 <thead>
@@ -8055,7 +8345,33 @@ Measures how much of the variance in the target variable is explained by the mod
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Reproducibility-Note">Reproducibility Note<a class="anchor-link" href="#Reproducibility-Note">¶</a></h2><p>This notebook is designed to support both full execution and faster reloading of previously saved results.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="reproducibility-note" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Reproducibility Note</h2>
+This notebook is designed to support both full execution and faster reloading of previously saved results.
+
 <p>When <code>QUICK_LOAD = False</code>, the notebook trains, tunes, evaluates, and saves the regression models from scratch. This provides the most accurate runtime information, but the full execution can take a significant amount of time depending on the computer hardware.</p>
 <p>When <code>QUICK_LOAD = True</code>, the notebook attempts to reload previously saved fitted models, tuned search objects, predictions, and result files from the <code>_exports</code> folder. This makes it possible to review the project and regenerate many of the comparison outputs much faster, without retraining every model.</p>
 <p>The saved notebook outputs represent results from completed runs. Before sharing the final version of this project, the notebook will be re-executed from the beginning with <code>QUICK_LOAD = False</code> in order to produce clean final outputs and accurate full runtime information.</p>
@@ -8129,7 +8445,31 @@ Measures how much of the variance in the target variable is explained by the mod
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Portfolio-export-paths">Portfolio export paths<a class="anchor-link" href="#Portfolio-export-paths">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="portfolio-export-paths" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Portfolio Export Paths</h2>
 </div>
 </div>
 </div>
@@ -8187,7 +8527,31 @@ Regression results: D:\WorkShop\Python\GitHub\Notes - ML\_exports\regression_mod
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2>Switches</h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="switches" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Switches</h2>
 <p>These switches control whether the notebook loads saved files or trains the models again.</p>
 <ul>
 <li><code>QUICK_LOAD = True</code><br/>
@@ -8254,7 +8618,31 @@ When <code>QUICK_LOAD = True</code>, the notebook loads existing files and does 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Shared-configuration-for-model-evaluation-and-tuning">Shared configuration for model evaluation and tuning<a class="anchor-link" href="#Shared-configuration-for-model-evaluation-and-tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="shared-configuration-for-model-evaluation-and-tuning" style="background-color:#405A77; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Shared Configuration for Model Evaluation and Tuning</h2>
 </div>
 </div>
 </div>
@@ -8290,7 +8678,31 @@ When <code>QUICK_LOAD = True</code>, the notebook loads existing files and does 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Load-the-Dataset">Load the Dataset<a class="anchor-link" href="#Load-the-Dataset">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="load-the-dataset" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Load the Dataset</h2>
 </div>
 </div>
 </div>
@@ -8376,7 +8788,31 @@ For the final experiment, the full diamonds dataset is used.</br></p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Check-the-Dataset">Check the Dataset<a class="anchor-link" href="#Check-the-Dataset">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="check-the-dataset" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Check the Dataset</h2>
 </div>
 </div>
 </div>
@@ -8748,6 +9184,41 @@ dtype: int64</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="target-definition" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Target Definition</h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Choose-the-target-column">Choose the target column<a class="anchor-link" href="#Choose-the-target-column">¶</a></h3>
 </div>
 </div>
@@ -8904,7 +9375,31 @@ dtype: int64</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Train-and-Test-Set">Train and Test Set<a class="anchor-link" href="#Train-and-Test-Set">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="train-and-test-set" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Train and Test Set</h2>
 </div>
 </div>
 </div>
@@ -9223,7 +9718,31 @@ Name: count, dtype: int64</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Feature-Engineering">Feature Engineering<a class="anchor-link" href="#Feature-Engineering">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="feature-engineering" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Feature Engineering</h2>
 </div>
 </div>
 </div>
@@ -9731,7 +10250,31 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Preprocessing">Preprocessing<a class="anchor-link" href="#Preprocessing">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="preprocessing" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Preprocessing</h2>
 </div>
 </div>
 </div>
@@ -9840,6 +10383,41 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="evaluation-functions" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Evaluation Functions</h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Create-evaluate_regression-function">Create <code>evaluate_regression</code> function<a class="anchor-link" href="#Create-evaluate_regression-function">¶</a></h3>
 </div>
 </div>
@@ -9923,7 +10501,31 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Load-the-saved-files">Load the saved files<a class="anchor-link" href="#Load-the-saved-files">¶</a></h1>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="load-the-saved-files" style="background-color:#477568; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Load the saved files</h2>
 </div>
 </div>
 </div>
@@ -10091,7 +10693,20 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -10102,7 +10717,7 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Baseline-models"><strong>Baseline models</strong><a class="anchor-link" href="#Baseline-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -10113,7 +10728,20 @@ categorical columns:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Dummy-Regressor"><span style="color:#927500">Dummy Regressor</span><a class="anchor-link" href="#Dummy-Regressor">¶</a></h2><p>The DummyRegressor is a simple baseline model that makes predictions without learning real relationships from the data.</p>
+<h1 id="baseline-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Baseline models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="dummy-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Dummy Regressor</h1>The DummyRegressor is a simple baseline model that makes predictions without learning real relationships from the data.
+
+
 </div>
 </div>
 </div>
@@ -11536,7 +12164,20 @@ R² gap:   0.0000
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -11547,7 +12188,7 @@ R² gap:   0.0000
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Linear-/-regularized-models"><strong>Linear / regularized models</strong><a class="anchor-link" href="#Linear-/-regularized-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -11558,7 +12199,20 @@ R² gap:   0.0000
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Linear-Regressor"><span style="color:#927500">Linear Regressor</span><a class="anchor-link" href="#Linear-Regressor">¶</a></h2><p>The model tries to find which line best fits the data.</p>
+<h1 id="linear-regularized-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Linear / regularized models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="linear-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Linear Regressor</h1>The model tries to find which line best fits the data.
+
+
 </div>
 </div>
 </div>
@@ -12139,8 +12793,21 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -12150,7 +12817,20 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Ridge-Regressor"><span style="color:#927500">Ridge Regressor</span><a class="anchor-link" href="#Ridge-Regressor">¶</a></h2><p>Ridge Regressor is a regularized version of Linear Regressor that helps reduce overfitting.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="ridge-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Ridge Regressor</h1>Ridge Regressor is a regularized version of Linear Regressor that helps reduce overfitting.
+
+
 </div>
 </div>
 </div>
@@ -12501,7 +13181,31 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="ridge-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -12944,8 +13648,21 @@ R² gap:   0.0110
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -12955,7 +13672,20 @@ R² gap:   0.0110
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Lasso-Regressor"><span style="color:#927500">Lasso Regressor</span><a class="anchor-link" href="#Lasso-Regressor">¶</a></h2><p>The Lasso Regressor is a regularized version of the Linear Regressor, which can reduce the weight of some features to zero.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="lasso-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Lasso Regressor</h1>The Lasso Regressor is a regularized version of the Linear Regressor, which can reduce the weight of some features to zero.
+
+
 </div>
 </div>
 </div>
@@ -13308,7 +14038,31 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="lasso-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -13752,6 +14506,30 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -13763,7 +14541,9 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="ElasticNet-Regressor"><span style="color:#927500">ElasticNet Regressor</span><a class="anchor-link" href="#ElasticNet-Regressor">¶</a></h2><p>The ElasticNet Regressor combines L1 and L2 regularization, so it balances feature selection and coefficient shrinkage.</p>
+<h1 id="elasticnet-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">ElasticNet Regressor</h1>The ElasticNet Regressor combines L1 and L2 regularization, so it balances feature selection and coefficient shrinkage.
+
+
 </div>
 </div>
 </div>
@@ -14116,7 +14896,31 @@ R² gap:   0.0076
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="elasticnet-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -14560,6 +15364,30 @@ R² gap:   0.0109
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -14571,7 +15399,9 @@ R² gap:   0.0109
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Bayesian-Ridge-Regressor"><span style="color:#927500">Bayesian Ridge Regressor</span><a class="anchor-link" href="#Bayesian-Ridge-Regressor">¶</a></h2><p>The BayesianRidge model is a linear Regressor model with built-in regularization based on Bayesian estimation.</p>
+<h1 id="bayesian-ridge-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Bayesian Ridge Regressor</h1>The BayesianRidge model is a linear Regressor model with built-in regularization based on Bayesian estimation.
+
+
 </div>
 </div>
 </div>
@@ -14928,7 +15758,31 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="bayesian-ridge-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -15372,6 +16226,30 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -15383,7 +16261,9 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Quantile-Regressor"><span style="color:#927500">Quantile Regressor</span><a class="anchor-link" href="#Quantile-Regressor">¶</a></h2><p>The QuantileRegressor model is a linear Regressor model that estimates a chosen quantile of the target distribution instead of the mean.</p>
+<h1 id="quantile-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Quantile Regressor</h1>The QuantileRegressor model is a linear Regressor model that estimates a chosen quantile of the target distribution instead of the mean.
+
+
 </div>
 </div>
 </div>
@@ -15737,7 +16617,31 @@ R² gap:   0.0146
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="quantile-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -16180,7 +17084,20 @@ R² gap:   0.0146
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -16191,7 +17108,7 @@ R² gap:   0.0146
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Robust-linear-models"><strong>Robust linear models</strong><a class="anchor-link" href="#Robust-linear-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -16202,7 +17119,20 @@ R² gap:   0.0146
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Huber-Regressor"><span style="color:#927500">Huber Regressor</span><a class="anchor-link" href="#Huber-Regressor">¶</a></h2><p>The HuberRegressor is a linear model that is more robust to outliers than ordinary linear regressor.</p>
+<h1 id="robust-linear-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Robust linear models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="huber-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Huber Regressor</h1>The HuberRegressor is a linear model that is more robust to outliers than ordinary linear regressor.
+
+
 </div>
 </div>
 </div>
@@ -16556,7 +17486,31 @@ R² gap:   0.0145
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="huber-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -17006,8 +17960,21 @@ R² gap:   0.0114
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -17017,7 +17984,20 @@ R² gap:   0.0114
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="RANSAC-Regressor"><span style="color:#927500">RANSAC Regressor</span><a class="anchor-link" href="#RANSAC-Regressor">¶</a></h2><p>The RANSAC Regressor is a robust regressor model that tries to fit the data while ignoring possible outliers.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="ransac-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">RANSAC Regressor</h1>The RANSAC Regressor is a robust regressor model that tries to fit the data while ignoring possible outliers.
+
+
 </div>
 </div>
 </div>
@@ -17316,7 +18296,31 @@ R² gap:   0.0138
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="ransac-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -17767,7 +18771,20 @@ R² gap:   0.0119
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -17778,7 +18795,7 @@ R² gap:   0.0119
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Online-linear-models"><strong>Online linear models</strong><a class="anchor-link" href="#Online-linear-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -17789,7 +18806,20 @@ R² gap:   0.0119
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="SGD-Regressor-(Stochastic-Gradient-Descent)"><span style="color:#927500">SGD Regressor (Stochastic Gradient Descent)</span><a class="anchor-link" href="#SGD-Regressor-(Stochastic-Gradient-Descent)">¶</a></h2><p>The SGDRegressor is a linear model trained with stochastic gradient descent, which makes it suitable for larger datasets and faster training.</p>
+<h1 id="online-linear-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Online linear models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="sgd-regressor-stochastic-gradient-descent" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">SGD Regressor (Stochastic Gradient Descent)</h1>The SGDRegressor is a linear model trained with stochastic gradient descent, which makes it suitable for larger datasets and faster training.
+
+
 </div>
 </div>
 </div>
@@ -18147,7 +19177,31 @@ R² gap:   0.0111
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="sgd-regressor-stochastic-gradient-descent-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -18603,8 +19657,21 @@ R² gap:   0.0110
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -18614,7 +19681,20 @@ R² gap:   0.0110
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Passive-Aggressive-Regressor"><span style="color:#927500">Passive Aggressive Regressor</span><a class="anchor-link" href="#Passive-Aggressive-Regressor">¶</a></h2><p>The PassiveAggressiveRegressor is an online linear model that updates itself aggressively when predictions are wrong.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="passive-aggressive-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Passive Aggressive Regressor</h1>The PassiveAggressiveRegressor is an online linear model that updates itself aggressively when predictions are wrong.
+
+
 </div>
 </div>
 </div>
@@ -18970,7 +20050,31 @@ R² gap:   0.0136
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="passive-aggressive-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -19431,7 +20535,20 @@ R² gap:   0.0112
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -19442,7 +20559,7 @@ R² gap:   0.0112
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="GLM-/-distribution-based-linear-models"><strong>GLM / distribution-based linear models</strong><a class="anchor-link" href="#GLM-/-distribution-based-linear-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -19453,7 +20570,20 @@ R² gap:   0.0112
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Poisson-Regressor"><span style="color:#927500">Poisson Regressor</span><a class="anchor-link" href="#Poisson-Regressor">¶</a></h2><p>The PoissonRegressor model is a generalized linear Regressor model designed for non-negative target values with Poisson-like distribution.</p>
+<h1 id="glm-distribution-based-linear-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">GLM / distribution-based linear models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="poisson-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Poisson Regressor</h1>The PoissonRegressor model is a generalized linear Regressor model designed for non-negative target values with Poisson-like distribution.
+
+
 </div>
 </div>
 </div>
@@ -19806,7 +20936,31 @@ R² gap:   0.0037
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="poisson-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -20251,8 +21405,21 @@ R² gap:   0.0029
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -20262,7 +21429,20 @@ R² gap:   0.0029
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Gamma-Regressor"><span style="color:#927500">Gamma Regressor</span><a class="anchor-link" href="#Gamma-Regressor">¶</a></h2><p>The GammaRegressor model is a generalized linear Regressor model designed for strictly positive target values with Gamma-like distribution.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="gamma-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Gamma Regressor</h1>The GammaRegressor model is a generalized linear Regressor model designed for strictly positive target values with Gamma-like distribution.
+
+
 </div>
 </div>
 </div>
@@ -20615,7 +21795,31 @@ R² gap:   -24544.3209
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="gamma-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -21060,7 +22264,20 @@ R² gap:   -0.0097
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -21071,7 +22288,7 @@ R² gap:   -0.0097
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Kernel-/-Distance-based-models"><strong>Kernel / Distance-based models</strong><a class="anchor-link" href="#Kernel-/-Distance-based-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -21082,7 +22299,20 @@ R² gap:   -0.0097
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="SVR---Support-Vector-Regression-(linear)"><span style="color:#927500">SVR - Support Vector Regression (linear)</span><a class="anchor-link" href="#SVR---Support-Vector-Regression-(linear)">¶</a></h2><p>The linear SVR is a support vector regression model that tries to fit the data while allowing a small margin of error.</p>
+<h1 id="kernel-distance-based-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Kernel / Distance-based models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="svr-support-vector-regression-linear" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">SVR - Support Vector Regression (linear)</h1>The linear SVR is a support vector regression model that tries to fit the data while allowing a small margin of error.
+
+
 </div>
 </div>
 </div>
@@ -21435,7 +22665,31 @@ R² gap:   0.0123
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="svr-support-vector-regression-linear-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -21878,8 +23132,21 @@ R² gap:   0.0139
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -21889,7 +23156,20 @@ R² gap:   0.0139
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="SVR---Support-Vector-Regression-(RBF)"><span style="color:#927500">SVR - Support Vector Regression (RBF)</span><a class="anchor-link" href="#SVR---Support-Vector-Regression-(RBF)">¶</a></h2><p>The RBF SVR is a support vector regression model that can learn more complex non-linear relationships in the data.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="svr-support-vector-regression-rbf" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">SVR - Support Vector Regression (RBF)</h1>The RBF SVR is a support vector regression model that can learn more complex non-linear relationships in the data.
+
+
 </div>
 </div>
 </div>
@@ -22183,7 +23463,31 @@ R² gap:   0.0117
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="svr-support-vector-regression-rbf-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -22631,6 +23935,30 @@ R² gap:   0.0057
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -22642,7 +23970,9 @@ R² gap:   0.0057
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="KNeighbors-Regressor"><span style="color:#927500">KNeighbors Regressor</span><a class="anchor-link" href="#KNeighbors-Regressor">¶</a></h2><p>The KNeighborsRegressor predicts the target value based on the values of the nearest training examples.</p>
+<h1 id="kneighbors-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">KNeighbors Regressor</h1>The KNeighborsRegressor predicts the target value based on the values of the nearest training examples.
+
+
 </div>
 </div>
 </div>
@@ -22937,7 +24267,31 @@ R² gap:   0.0394
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="kneighbors-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -23382,6 +24736,30 @@ R² gap:   0.0118
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -23393,7 +24771,9 @@ R² gap:   0.0118
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="NuSVR-Regressor"><span style="color:#927500">NuSVR Regressor</span><a class="anchor-link" href="#NuSVR-Regressor">¶</a></h2><p>The NuSVR model is a support vector Regressor that uses the parameter nu to control the number of support vectors and training errors.</p>
+<h1 id="nusvr-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">NuSVR Regressor</h1>The NuSVR model is a support vector Regressor that uses the parameter nu to control the number of support vectors and training errors.
+
+
 </div>
 </div>
 </div>
@@ -23745,7 +25125,31 @@ R² gap:   0.0055
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="nusvr-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -24190,7 +25594,20 @@ R² gap:   0.0089
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -24201,7 +25618,7 @@ R² gap:   0.0089
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Tree-based-models"><strong>Tree-based models</strong><a class="anchor-link" href="#Tree-based-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -24212,7 +25629,20 @@ R² gap:   0.0089
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Decision-Tree-Regressor"><span style="color:#927500">Decision Tree Regressor</span><a class="anchor-link" href="#Decision-Tree-Regressor">¶</a></h2><p>The DecisionTreeRegressor splits the data into smaller groups and makes predictions based on tree-like decision rules.</p>
+<h1 id="tree-based-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Tree-based models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="decision-tree-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Decision Tree Regressor</h1>The DecisionTreeRegressor splits the data into smaller groups and makes predictions based on tree-like decision rules.
+
+
 </div>
 </div>
 </div>
@@ -24508,7 +25938,31 @@ R² gap:   0.0074
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="decision-tree-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -24957,7 +26411,20 @@ R² gap:   0.0120
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -24968,7 +26435,7 @@ R² gap:   0.0120
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Tree-based-ensemble-models"><strong>Tree-based ensemble models</strong><a class="anchor-link" href="#Tree-based-ensemble-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -24979,7 +26446,20 @@ R² gap:   0.0120
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Random-Forest-Regressor"><span style="color:#927500">Random Forest Regressor</span><a class="anchor-link" href="#Random-Forest-Regressor">¶</a></h2><p>The RandomForestRegressor combines many decision trees and averages their predictions to improve accuracy and reduce overfitting.</p>
+<h1 id="tree-based-ensemble-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Tree-based ensemble models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="random-forest-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Random Forest Regressor</h1>The RandomForestRegressor combines many decision trees and averages their predictions to improve accuracy and reduce overfitting.
+
+
 </div>
 </div>
 </div>
@@ -25275,7 +26755,31 @@ R² gap:   0.0192
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="random-forest-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -25728,8 +27232,21 @@ R² gap:   0.0126
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -25739,7 +27256,20 @@ R² gap:   0.0126
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Extra-Trees-Regressor"><span style="color:#927500">Extra Trees Regressor</span><a class="anchor-link" href="#Extra-Trees-Regressor">¶</a></h2><p>The ExtraTreesRegressor is an ensemble model that combines many randomized decision trees to make more stable predictions.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="extra-trees-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Extra Trees Regressor</h1>The ExtraTreesRegressor is an ensemble model that combines many randomized decision trees to make more stable predictions.
+
+
 </div>
 </div>
 </div>
@@ -26035,7 +27565,31 @@ R² gap:   0.0113
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="extra-trees-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -26489,7 +28043,20 @@ R² gap:   0.0122
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -26500,7 +28067,7 @@ R² gap:   0.0122
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Boosting-ensemble-models"><strong>Boosting ensemble models</strong><a class="anchor-link" href="#Boosting-ensemble-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -26511,7 +28078,20 @@ R² gap:   0.0122
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="AdaBoost-Regressor"><span style="color:#927500">AdaBoost Regressor</span><a class="anchor-link" href="#AdaBoost-Regressor">¶</a></h2><p>The AdaBoostRegressor combines many weak models and improves them step by step by focusing more on difficult training examples.</p>
+<h1 id="boosting-ensemble-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Boosting ensemble models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="adaboost-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">AdaBoost Regressor</h1>The AdaBoostRegressor combines many weak models and improves them step by step by focusing more on difficult training examples.
+
+
 </div>
 </div>
 </div>
@@ -26805,7 +28385,31 @@ R² gap:   0.0054
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="adaboost-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -27269,8 +28873,21 @@ R² gap:   0.0047
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -27280,7 +28897,20 @@ R² gap:   0.0047
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Gradient-Boosting-Regressor"><span style="color:#927500">Gradient Boosting Regressor</span><a class="anchor-link" href="#Gradient-Boosting-Regressor">¶</a></h2><p>The GradientBoostingRegressor is an ensemble model that builds trees step by step, where each new tree tries to correct the errors of the previous ones.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="gradient-boosting-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Gradient Boosting Regressor</h1>The GradientBoostingRegressor is an ensemble model that builds trees step by step, where each new tree tries to correct the errors of the previous ones.
+
+
 </div>
 </div>
 </div>
@@ -27576,7 +29206,31 @@ R² gap:   0.0043
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="gradient-boosting-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -28029,8 +29683,21 @@ R² gap:   0.0101
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -28040,7 +29707,20 @@ R² gap:   0.0101
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Hist-Gradient-Boosting-Regressor"><span style="color:#927500">Hist Gradient Boosting Regressor</span><a class="anchor-link" href="#Hist-Gradient-Boosting-Regressor">¶</a></h2><p>The HistGradientBoostingRegressor is a fast boosting model that groups continuous values into bins to speed up training on larger datasets.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="hist-gradient-boosting-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hist Gradient Boosting Regressor</h1>The HistGradientBoostingRegressor is a fast boosting model that groups continuous values into bins to speed up training on larger datasets.
+
+
 </div>
 </div>
 </div>
@@ -28336,7 +30016,31 @@ R² gap:   0.0050
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="hist-gradient-boosting-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -28789,6 +30493,30 @@ R² gap:   0.0091
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -28800,7 +30528,9 @@ R² gap:   0.0091
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="XGBoost-Regressor"><span style="color:#927500">XGBoost Regressor</span><a class="anchor-link" href="#XGBoost-Regressor">¶</a></h2><p>The XGBoost Regressor is a powerful boosting model that builds trees step by step to improve prediction accuracy.</p>
+<h1 id="xgboost-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">XGBoost Regressor</h1>The XGBoost Regressor is a powerful boosting model that builds trees step by step to improve prediction accuracy.
+
+
 </div>
 </div>
 </div>
@@ -29109,7 +30839,31 @@ R² gap:   0.0065
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="xgboost-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -29566,6 +31320,30 @@ R² gap:   0.0112
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -29577,7 +31355,9 @@ R² gap:   0.0112
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="LightGBM-Regressor"><span style="color:#927500">LightGBM Regressor</span><a class="anchor-link" href="#LightGBM-Regressor">¶</a></h2><p>The LightGBM Regressor is a fast boosting model that is especially effective on larger tabular datasets.</p>
+<h1 id="lightgbm-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">LightGBM Regressor</h1>The LightGBM Regressor is a fast boosting model that is especially effective on larger tabular datasets.
+
+
 </div>
 </div>
 </div>
@@ -29910,7 +31690,31 @@ R² gap:   0.0049
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="lightgbm-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -30369,6 +32173,30 @@ R² gap:   0.0071
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -30380,7 +32208,9 @@ R² gap:   0.0071
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="CatBoost-Regressor"><span style="color:#927500">CatBoost Regressor</span><a class="anchor-link" href="#CatBoost-Regressor">¶</a></h2><p>The CatBoost Regressor is a boosting model that works especially well with tabular data and categorical features.</p>
+<h1 id="catboost-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">CatBoost Regressor</h1>The CatBoost Regressor is a boosting model that works especially well with tabular data and categorical features.
+
+
 </div>
 </div>
 </div>
@@ -30690,7 +32520,31 @@ R² gap:   0.0042
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="catboost-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -31142,7 +32996,20 @@ R² gap:   0.0087
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -31153,7 +33020,7 @@ R² gap:   0.0087
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Neural-models"><strong>Neural models</strong><a class="anchor-link" href="#Neural-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -31164,7 +33031,20 @@ R² gap:   0.0087
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="MLP-Regressor"><span style="color:#927500">MLP Regressor</span><a class="anchor-link" href="#MLP-Regressor">¶</a></h2><p>The MLPRegressor is a neural network model that can learn more complex non-linear relationships in the data.</p>
+<h1 id="neural-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Neural models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="mlp-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">MLP Regressor</h1>The MLPRegressor is a neural network model that can learn more complex non-linear relationships in the data.
+
+
 </div>
 </div>
 </div>
@@ -31460,7 +33340,31 @@ R² gap:   0.0027
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="mlp-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -31915,7 +33819,20 @@ R² gap:   0.0038
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr style="border:10px dashed gray"/>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
@@ -31926,7 +33843,7 @@ R² gap:   0.0038
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Advanced-ensemble-models"><strong>Advanced ensemble models</strong><a class="anchor-link" href="#Advanced-ensemble-models">¶</a></h1>
+<hr/>
 </div>
 </div>
 </div>
@@ -31937,7 +33854,20 @@ R² gap:   0.0038
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Bagging-Regressor"><span style="color:#927500">Bagging Regressor</span><a class="anchor-link" href="#Bagging-Regressor">¶</a></h2><p>The BaggingRegressor trains multiple models on different random samples of the training data and averages their predictions.</p>
+<h1 id="advanced-ensemble-models" style="background-color:#555555; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Advanced ensemble models</h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="bagging-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Bagging Regressor</h1>The BaggingRegressor trains multiple models on different random samples of the training data and averages their predictions.
+
+
 </div>
 </div>
 </div>
@@ -32237,7 +34167,31 @@ R² gap:   0.0159
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Hyperparameter-Tuning">Hyperparameter Tuning<a class="anchor-link" href="#Hyperparameter-Tuning">¶</a></h3>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="bagging-regressor-hyperparameter-tuning" style="background-color:#167C80; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Hyperparameter Tuning</h2>
 </div>
 </div>
 </div>
@@ -32705,17 +34659,6 @@ R² gap:   0.0150
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Voting-and-Stacking-Ensemble-Strategy">Voting and Stacking Ensemble Strategy<a class="anchor-link" href="#Voting-and-Stacking-Ensemble-Strategy">¶</a></h3><p>The initial Voting and Stacking regressors are built from the selected untuned model pipelines.</p>
 <p>The tuned Voting and Stacking regressors are built from the best tuned estimators produced by the earlier hyperparameter searches. No additional grid search is applied to Voting weights or to the Stacking final estimator, because these extra searches were computationally expensive and produced only small improvements in previous runs.</p>
 <p>This keeps the comparison clear:</p>
@@ -32884,8 +34827,21 @@ R² gap:   0.0150
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<hr>
-</hr></div>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
 </div>
 </div>
 </div>
@@ -32895,7 +34851,20 @@ R² gap:   0.0150
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Voting-Regressor"><span style="color:#927500">Voting Regressor</span><a class="anchor-link" href="#Voting-Regressor">¶</a></h2><p>The VotingRegressor combines the predictions of multiple regression models and returns their average as the final prediction.</p>
+<hr/>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="voting-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Voting Regressor</h1>
+The VotingRegressor combines the predictions of multiple regression models and returns their average as the final prediction.
+
 <p>In this notebook, the initial Voting Regressor is built from selected untuned models, while the tuned Voting Regressor is built from the best estimators found by earlier hyperparameter searches.</p>
 </div>
 </div>
@@ -33715,6 +35684,30 @@ R² gap:   0.0092
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -33726,7 +35719,9 @@ R² gap:   0.0092
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Stacking-Regressor"><span style="color:#927500">Stacking Regressor</span><a class="anchor-link" href="#Stacking-Regressor">¶</a></h2><p>The StackingRegressor combines multiple regression models and trains a final meta-model to learn how to combine their predictions.</p>
+<h1 id="stacking-regressor" style="background-color:#8B1E1E; color:#ffffff; padding:7px 36px 9px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Stacking Regressor</h1>
+The StackingRegressor combines multiple regression models and trains a final meta-model to learn how to combine their predictions.
+
 <p>In this notebook, Ridge regression is used as the final estimator, and the tuned Stacking Regressor is built from the best estimators found by earlier hyperparameter searches.</p>
 </div>
 </div>
@@ -34561,6 +36556,30 @@ R² gap:   0.0079
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -34572,7 +36591,7 @@ R² gap:   0.0079
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Tuned-Regression-Model-Comparison"><span style="color:#275edb">Tuned Regression Model Comparison</span><a class="anchor-link" href="#Tuned-Regression-Model-Comparison">¶</a></h2>
+<h2 id="tuned-regression-model-comparison" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Tuned Regression Model Comparison</h2>
 </div>
 </div>
 </div>
@@ -35922,6 +37941,30 @@ Best model test R2: 0.9828545638547189
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
 </div>
 </div>
@@ -35933,7 +37976,7 @@ Best model test R2: 0.9828545638547189
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Prediction-Comparison-on-Selected-Test-Samples"><span style="color:#275edb">Prediction Comparison on Selected Test Samples</span><a class="anchor-link" href="#Prediction-Comparison-on-Selected-Test-Samples">¶</a></h2>
+<h2 id="prediction-comparison-on-selected-test-samples" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Prediction Comparison on Selected Test Samples</h2>
 </div>
 </div>
 </div>
@@ -37223,7 +39266,31 @@ Best model test R2: 0.9828545638547189
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Prediction-range-and-difference-summary"><span style="color:#275edb">Prediction range and difference summary</span><a class="anchor-link" href="#Prediction-range-and-difference-summary">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="prediction-range-and-difference-summary" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Prediction range and difference summary</h2>
 </div>
 </div>
 </div>
@@ -37957,7 +40024,31 @@ Best model test R2: 0.9828545638547189
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Best-Model-Performance-by-Price-Range"><span style="color:#275edb">Best Model Performance by Price Range</span><a class="anchor-link" href="#Best-Model-Performance-by-Price-Range">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="best-model-performance-by-price-range" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Best Model Performance by Price Range</h2>
 </div>
 </div>
 </div>
@@ -38518,7 +40609,31 @@ Best model test R2: 0.9828545638547189
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="High-Value-Prediction-Performance"><span style="color:#275edb">High-Value Prediction Performance</span><a class="anchor-link" href="#High-Value-Prediction-Performance">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="high-value-prediction-performance" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">High-Value Prediction Performance</h2>
 </div>
 </div>
 </div>
@@ -38563,7 +40678,31 @@ Mean pred high value: 16172.427284286647
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Actual-vs-Predicted-Price-Distributions-by-Model-Group"><span style="color:#275edb">Actual vs Predicted Price Distributions by Model Group</span><a class="anchor-link" href="#Actual-vs-Predicted-Price-Distributions-by-Model-Group">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="actual-vs-predicted-price-distributions-by-model-group" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Actual vs Predicted Price Distributions by Model Group</h2>
 </div>
 </div>
 </div>
@@ -38717,7 +40856,31 @@ Mean pred high value: 16172.427284286647
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Prediction-Error-Analysis"><span style="color:#275edb">Prediction Error Analysis</span><a class="anchor-link" href="#Prediction-Error-Analysis">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="prediction-error-analysis" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Prediction Error Analysis</h2>
 </div>
 </div>
 </div>
@@ -39200,7 +41363,31 @@ Mean pred high value: 16172.427284286647
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="best_params-summary"><span style="color:#275edb">best_params summary</span><a class="anchor-link" href="#best_params-summary">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="best-params-summary" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">best_params summary</h2>
 </div>
 </div>
 </div>
@@ -39539,7 +41726,31 @@ Mean pred high value: 16172.427284286647
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Permutation-Importance-for-the-Best-Regression-Model"><span style="color:#275edb">Permutation Importance for the Best Regression Model</span><a class="anchor-link" href="#Permutation-Importance-for-the-Best-Regression-Model">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="permutation-importance-for-the-best-regression-model" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Permutation Importance for the Best Regression Model</h2>
 </div>
 </div>
 </div>
@@ -39803,7 +42014,32 @@ Explanation is based on original input features.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Log-Target-Mini-Experiment"><span style="color:#275edb">Log-Target Mini Experiment</span><a class="anchor-link" href="#Log-Target-Mini-Experiment">¶</a></h2><p><strong>This is a small extra test to check whether the model works better when the target values are transformed to a log scale.</strong></p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="log-target-mini-experiment" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Log-Target Mini Experiment</h2>**This is a small extra test to check whether the model works better when the target values are transformed to a log scale.**
+
 <p>The model is trained on <code>log1p(y_train)</code> instead of the original target values.<br/>
 After prediction, the results are transformed back to the original scale with <code>expm1()</code>.</p>
 <p>This experiment is useful when the target values are highly skewed or when a few very large values may affect the model too much.</p>
@@ -39921,7 +42157,31 @@ Log target R2: 0.9823065027644141
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Saving-and-Loading-the-Models"><span style="color:#275edb">Saving and Loading the Models</span><a class="anchor-link" href="#Saving-and-Loading-the-Models">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="saving-and-loading-the-models" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Saving and Loading the Models</h2>
 </div>
 </div>
 </div>
@@ -43665,7 +45925,31 @@ forceTheme('sk-container-id-2');</script></body>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Saving-and-Loading-the-Search-Objects"><span style="color:#275edb">Saving and Loading the Search Objects</span><a class="anchor-link" href="#Saving-and-Loading-the-Search-Objects">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="saving-and-loading-the-search-objects" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Saving and Loading the Search Objects</h2>
 </div>
 </div>
 </div>
@@ -44357,7 +46641,31 @@ forceTheme('sk-container-id-2');</script></body>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Saving-and-Loading-the-Base-Models"><span style="color:#275edb">Saving and Loading the Base Models</span><a class="anchor-link" href="#Saving-and-Loading-the-Base-Models">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="saving-and-loading-the-base-models" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Saving and Loading the Base Models</h2>
 </div>
 </div>
 </div>
@@ -48114,7 +50422,31 @@ forceTheme('sk-container-id-3');</script></body>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Saving-and-Loading-a-list-of-Predictions"><span style="color:#275edb">Saving and Loading a list of Predictions</span><a class="anchor-link" href="#Saving-and-Loading-a-list-of-Predictions">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="saving-and-loading-a-list-of-predictions" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Saving and Loading a list of Predictions</h2>
 </div>
 </div>
 </div>
@@ -49885,7 +52217,31 @@ forceTheme('sk-container-id-3');</script></body>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Practical-Heuristic-Comparison-of-Regressor-Models"><span style="color:#275edb">Practical Heuristic Comparison of Regressor Models</span><a class="anchor-link" href="#Practical-Heuristic-Comparison-of-Regressor-Models">¶</a></h2>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="practical-heuristic-comparison-of-regressor-models" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Practical Heuristic Comparison of Regressor Models</h2>
 </div>
 </div>
 </div>
@@ -50831,7 +53187,33 @@ Date: 2026/08/21
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Practical-Model-Selection:-Performance,-Runtime-and-File-Size">Practical Model Selection: Performance, Runtime and File Size<a class="anchor-link" href="#Practical-Model-Selection:-Performance,-Runtime-and-File-Size">¶</a></h2><p>Model selection is not only about predictive accuracy. In practical machine learning workflows, runtime, prediction speed, file size, memory use, and deployment complexity can also influence which model is the best choice.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="practical-model-selection-performance-runtime-and-file-size" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Practical Model Selection: Performance, Runtime and File Size</h2>
+Model selection is not only about predictive accuracy. In practical machine learning workflows, runtime, prediction speed, file size, memory use, and deployment complexity can also influence which model is the best choice.
+
 <p>The saved fitted model file sizes add a useful practical perspective to the final comparison. They give an approximate indication of how large each trained model artifact is when saved and reused. This is important because a highly accurate model may not always be the most practical option if it is slow to train, slow to predict, large to store, or more complex to deploy.</p>
 <p>Search object sizes are not used for practical deployment comparison because search objects can contain cross-validation metadata, parameter search results, and additional information that would normally not be needed when deploying only the final fitted model.</p>
 <p>In this project, the tuned Stacking Regressor achieved the best overall RMSE, while the tuned Voting Regressor produced a very similar result. However, both models are ensemble-based and can be more complex or larger than some individual models. From a practical point of view, tuned LightGBM and tuned CatBoost are especially attractive alternatives because they achieved strong predictive performance while remaining simpler than the largest ensemble combinations.</p>
@@ -50846,7 +53228,33 @@ Date: 2026/08/21
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Final-Model-Comparison">Final Model Comparison<a class="anchor-link" href="#Final-Model-Comparison">¶</a></h2><p>The final regression comparison shows that the strongest overall performance was achieved by ensemble-based, boosting-based, and meta-estimator models. Based on the primary RMSE metric, the best-performing model was the tuned Stacking Regressor.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="final-model-comparison" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Final Model Comparison</h2>
+The final regression comparison shows that the strongest overall performance was achieved by ensemble-based, boosting-based, and meta-estimator models. Based on the primary RMSE metric, the best-performing model was the tuned Stacking Regressor.
+
 <p>The tuned Stacking Regressor achieved the best overall test RMSE, with an RMSE of 522.41 and an R² score of 0.9829. It also achieved a strong test MAE of 264.66. This suggests that combining several strong tuned regressors through a meta-model can slightly improve predictive performance on this structured tabular regression task.</p>
 <p>The tuned Voting Regressor was extremely close behind, achieving a test RMSE of 523.72, an R² score of 0.9828, and the lowest test MAE among the top models at 263.88. This makes Voting a very strong practical alternative, especially when a simpler ensemble structure is preferred.</p>
 <p>Among the individual non-meta models, tuned CatBoost, tuned Gradient Boosting, tuned Extra Trees, tuned MLP, and tuned LightGBM all produced highly competitive results. This confirms that tree-based ensemble, boosting, and flexible non-linear methods are highly effective for this type of structured regression problem.</p>
@@ -50863,7 +53271,33 @@ Date: 2026/08/21
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Limitations-and-Future-Work">Limitations and Future Work<a class="anchor-link" href="#Limitations-and-Future-Work">¶</a></h2><p>Although this project compares a broad range of regression models, the results should be interpreted with several limitations in mind.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="limitations-and-future-work" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Limitations and Future Work</h2>
+Although this project compares a broad range of regression models, the results should be interpreted with several limitations in mind.
+
 <p>First, the analysis is based on a single structured tabular dataset. Therefore, the results show how the models behave on this particular diamond price prediction task, but they do not prove that the same model family would perform best on all regression problems.</p>
 <p>Second, the hyperparameter tuning process uses predefined and, in some cases, iteratively refined search spaces. These search spaces were designed to be practical and computationally manageable, and the aim was to obtain strong model configurations for fairer comparison. However, they may not include every possible strong configuration for each model. Some models could potentially achieve better results with larger, more specialized, or more computationally expensive tuning strategies.</p>
 <p>Third, the tuned Voting and Stacking regressors are built from the best estimators found by earlier hyperparameter searches. No additional Voting weight search or Stacking final-estimator grid search is applied in the final version, because these extra searches were computationally expensive and produced only small improvements in previous runs. This makes the workflow more practical, but it also means that the ensemble configurations are not exhaustively optimised.</p>
@@ -50891,7 +53325,33 @@ Date: 2026/08/21
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>This project compared approximately 30 supervised regression models on the <code>diamonds</code> dataset using a consistent preprocessing, training, tuning, and evaluation framework.</p>
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="conclusion" style="background-color:#245B91; color:#ffffff; padding:7px 36px 12px 36px; box-sizing:border-box; display:block; width:100%; clip-path:polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);">Conclusion</h2>
+This project compared approximately 30 supervised regression models on the `diamonds` dataset using a consistent preprocessing, training, tuning, and evaluation framework.
+
 <p>The task was to predict diamond prices from the available numerical and categorical features, including carat, cut, colour, clarity, depth, table, and physical dimensions.</p>
 <p>The final results show that ensemble-based, boosting-based, and meta-estimator approaches were the strongest model families for this diamond price prediction task. Based on the primary RMSE metric, the best-performing model was the tuned Stacking Regressor.</p>
 <p>The tuned Stacking Regressor achieved the best overall test performance, with an RMSE of 522.41, an MAE of 264.66, and an R² score of 0.9829. This suggests that combining several strong tuned regressors through a meta-model can slightly improve predictive performance on this structured tabular dataset.</p>
@@ -50902,6 +53362,30 @@ Date: 2026/08/21
 <p>The saved fitted model file sizes add another practical perspective to the comparison. Large ensemble models can provide excellent predictive performance, but they may also create larger model artifacts and require more storage or deployment resources. In contrast, some individual models, such as tuned LightGBM or tuned CatBoost, may offer a better practical balance between predictive performance, training time, prediction speed, and saved model size.</p>
 <p>In summary, the tuned Stacking Regressor was the best overall model based on the primary RMSE metric. The tuned Voting Regressor was the closest ensemble alternative, producing a very similar result and the lowest MAE among the top models. Among the individual non-meta models, tuned CatBoost, tuned Gradient Boosting, tuned Extra Trees, and tuned LightGBM were among the strongest predictive alternatives. From a practical deployment perspective, tuned LightGBM and tuned CatBoost are especially attractive because they provide strong performance without the same level of model size and ensemble complexity as the largest models.</p>
 <p>Overall, this notebook provides a broad supervised regression benchmark on structured tabular data. It also creates a reusable framework that can be extended to additional datasets, deeper interpretability analysis, alternative feature engineering strategies, additional ensemble experiments, and a shorter paper-style technical report.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<a href="#top-of-the-page" style="text-decoration:none;">
+<span style="
+    display:inline-block;
+    padding:6px 12px;
+    background-color:#495057;
+    color:#f8f9fa;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:Calibri, Arial, sans-serif;
+    font-size:14px;
+  ">
+    ↑ Back to the top
+  </span>
+</a>
 </div>
 </div>
 </div>
